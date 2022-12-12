@@ -5,32 +5,61 @@ ph meter & temperature for aquarium
 
 
 ## hacs Card install
-1. Find and install `LG WebOS Remote Control` plugin
+1. add madmicio/pH-meter-Temperature as custom reposity
 
-2. Add a reference  inside your resources config:
+2. Find and install `pH-meter-Temperature` plugin
+
+3. Add a reference  inside your resources config:
 
   ```yaml
 resources:
   - type: module
-    url: /hacsfiles/LG-WebOS-Remote-Control/lg-remote-control.js
+    url: /hacsfiles/LG-WebOS-Remote-Control/ph_meter.js
 ```
 
 
 ### Manual install
 
-1. Download and copy `lg-remote-control.js` from (https://github.com/madmicio/LG-WebOS-Remote-Control) into your custom components  directory.
+1. Download and copy `ph_meter.js` from (https://github.com/madmicio/pH-meter-Temperature) into your custom components  directory.
 
-2. Add a reference `lg-remote-control.js` inside your resources config:
+2. Add a reference `ph_meter.js` inside your resources config:
 
   ```yaml
   resources:
-    - url: /local/"your_directory"/lg-remote-control.js
+    - url: /local/"your_directory"/ph_meter.js
       type: module
   ```
-# lovelace config: default view
+### lovelace full config (left card):
 ```yaml
-- type: 'custom:lg-remote-control'
-  entity: media_player.tv_lg_55c8
-  mac: xx:xx:xx:xx
+type: 'custom:ph-meter'
+entity: sensor.ph_sensor
+temperature: sensor.temperatura_acquario
+ph_state: sensor.ph_state
 ```
 
+### lovelace no temperature config (center card):
+```yaml
+type: 'custom:ph-meter'
+entity: sensor.ph_sensor
+ph_state: sensor.ph_state
+```
+
+### lovelace compact config (rigth card):
+```yaml
+type: 'custom:ph-meter'
+entity: sensor.ph_sensor
+ph_state: sensor.ph_state
+compact: true
+```
+### Main Options
+| Name | Type | Default | Supported options | Description |
+| -------------- | ----------- | ------------ | ------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `type` | string | **Required** | type: 'custom:ph-meter' | Type of the card |
+| `entity` | string | **Required** |  | ph sensor entity |
+| `name` | string | **Option** |  | aquarium name |
+| `temperature` | string | **Option** |  | temperature sensor entity |
+| `ph_state` | string | **Option** |  | ph state sensor entity |
+| `temp_min` | number | "18" |  | minimum temperature of the thermometer range |
+| `temp_max` | number | "30" |  | maximun temperature of the thermometer range |
+| `temp_min_range_ok` | number | "22" |  | minimum temperature of the comfort zone range. (green area of the gradient) |
+| `temp_max_range_ok` | number | "24" |  | maximum temperature of the comfort zone range. (green area of the gradient) |
