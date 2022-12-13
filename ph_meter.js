@@ -235,9 +235,9 @@ class PhMeterCard extends LitElement {
 }
 
 .item-ph-bar {
-    font-size: 3.5em;
+    font-size: 3em;
     text-align: right;
-    padding-top: 8px;
+    padding-top: 10px;
     color: #fff;
     text-shadow: -1px 2px 4px rgba(0,0,0,.5),1px 1px 3px rgba(0,0,0,.5)
 }
