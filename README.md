@@ -1,7 +1,11 @@
 # pH-meter-Temperature
 ph meter & temperature for aquarium
+
+
 [![buymeacoffee_badge](https://img.shields.io/badge/Donate-buymeacoffe-ff813f?style=flat)](https://www.buymeacoffee.com/madmicio)
-![all](example/card.jpg)
+
+
+![all](example/card2.jpg)
 
 
 ## hacs Card install
@@ -29,7 +33,7 @@ resources:
     - url: /local/"your_directory"/ph_meter.js
       type: module
   ```
-### lovelace full config (left card):
+### lovelace full config (ph meter & temperature):
 ```yaml
 type: 'custom:ph-meter'
 entity: sensor.ph_sensor
@@ -37,20 +41,29 @@ temperature: sensor.temperatura_acquario
 ph_state: sensor.ph_state
 ```
 
-### lovelace no temperature config (center card):
+### lovelace no temperature config (ph meter):
 ```yaml
 type: 'custom:ph-meter'
 entity: sensor.ph_sensor
 ph_state: sensor.ph_state
 ```
 
-### lovelace compact config (rigth card):
+### lovelace compact config ph meter compact):
 ```yaml
 type: 'custom:ph-meter'
 entity: sensor.ph_sensor
 ph_state: sensor.ph_state
 compact: true
 ```
+### lovelace compact config ph meter compact & temperature):
+```yaml
+type: 'custom:ph-meter'
+entity: sensor.ph_sensor
+temperature: sensor.temperatura_acquario
+ph_state: sensor.ph_state
+compact: true
+```
+
 ### Main Options
 | Name | Type | Default | Supported options | Description |
 | -------------- | ----------- | ------------ | ------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -63,3 +76,8 @@ compact: true
 | `temp_max` | number | "30" |  | maximun temperature of the thermometer range |
 | `temp_min_range_ok` | number | "22" |  | minimum temperature of the comfort zone range. (green area of the gradient) |
 | `temp_max_range_ok` | number | "24" |  | maximum temperature of the comfort zone range. (green area of the gradient) |
+
+
+### custom config + acquarium name:
+
+![all](example/card-custom.jpg)
