@@ -17,8 +17,8 @@ ph meter & temperature for aquarium
 
   ```yaml
 resources:
-  - type: module
-    url: /hacsfiles/LG-WebOS-Remote-Control/ph_meter.js
+url: /hacsfiles/ph-meter-temperature/ph_meter.js
+type: module
 ```
 
 
