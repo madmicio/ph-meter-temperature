@@ -81,3 +81,15 @@ compact: true
 ### custom config + acquarium name:
 
 ![all](example/card-custom.jpg)
+
+```yaml
+type: 'custom:ph-meter'
+entity: sensor.ph_sensor
+temperature: sensor.temperatura_acquario
+name: acquarium n°1
+ph_state: sensor.ph_state
+temp_min: "10"
+temp_max: "26"
+temp_min_range_ok: "18"
+temp_max_range_ok: "20"
+```
