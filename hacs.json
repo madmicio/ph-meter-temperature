@@ -1,6 +1,6 @@
 {
 "name": "pH meter",
 "content_in_root": true,
-"filename": "my_super_awesome_thing.js",
+"filename": "ph_meter.js",
 "render_readme" : true
 }
