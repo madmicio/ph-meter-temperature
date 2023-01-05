@@ -84,7 +84,7 @@ compact: true
 | `temp_min_range_ok` | number | "22" |  | minimum temperature of the comfort zone range. (green area of the gradient) |
 | `temp_max_range_ok` | number | "24" |  | maximum temperature of the comfort zone range. (green area of the gradient) |
 | `badge_color` | number | "rgba(21, 168, 224, 0.2)" |  | badge color backgroud; plese use olny rgba format. adjust opacity in rgba code |
-
+| `color_desaturation` | number | "100" |  | use this option to make the colors less saturated |
 
 ### custom config + acquarium name:
 
