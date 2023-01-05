@@ -139,3 +139,30 @@ ph_high: input_number.acquario_ph_high
 ph_low: input_number.acquario_ph_low
 color_saturation: "50%"
 ```
+## to use badges for alerts you need to configure input numbers in home assistant
+```yaml
+acquario_temp_high:
+  name: allarme temperatura elevata
+  initial: 27
+  min: 24
+  max: 32
+  step: 0.1
+acquario_temp_low:
+  name: allarme temperatura bassa
+  initial: 23
+  min: 18
+  max: 26
+  step: 0.1
+acquario_ph_high:
+  name: allarme temperatura elevata
+  initial: 7.9
+  min: 7
+  max: 8
+  step: 0.01
+acquario_ph_low:
+  name: allarme temperatura bassa
+  initial: 6.8
+  min: 6
+  max: 7
+  step: 0.01
+```
