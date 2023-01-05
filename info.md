@@ -5,7 +5,7 @@ ph meter & temperature for aquarium
 [![buymeacoffee_badge](https://img.shields.io/badge/Donate-buymeacoffe-ff813f?style=flat)](https://www.buymeacoffee.com/madmicio)
 
 
-![all](example/card2.jpg)
+![all](example/card3.jpg)
 
 
 ## hacs Card install
