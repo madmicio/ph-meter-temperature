@@ -72,10 +72,18 @@ compact: true
 | `name` | string | **Option** |  | aquarium name |
 | `temperature` | string | **Option** |  | temperature sensor entity |
 | `ph_state` | string | **Option** |  | ph state sensor entity |
+| `tds` | string |  | sensor.yourtdssensor | tds sensor |
+| `ec` | string |  | sensor.yourecsensor | ec sensor |
+| `salinity` | string | **Option** | sensor.yoursolinitysensor | salinity sensor |
+| `temp_high` | string | **Option** | input_number.yourinput_number_high_temp | to allow this option you need to define a input number for high value temperature alert |
+| `temp_low` | string | **Option** | input_number.yourinput_number_low_temp | to allow this option you need to define a input number for low value temperature alert |
+| `ph_high` | string | **Option** | input_number.yourinput_number_ph_temp | to allow this option you need to define a input number for high value pH alert |
+| `ph_low` | string | **Option** | input_number.yourinput_number_ph_temp | to allow this option you need to define a input number for low value pH alert |
 | `temp_min` | number | "18" |  | minimum temperature of the thermometer range |
 | `temp_max` | number | "30" |  | maximun temperature of the thermometer range |
 | `temp_min_range_ok` | number | "22" |  | minimum temperature of the comfort zone range. (green area of the gradient) |
 | `temp_max_range_ok` | number | "24" |  | maximum temperature of the comfort zone range. (green area of the gradient) |
+| `badge_color` | number | "rgba(21, 168, 224, 1)" |  | badge color backgroud; plese use olny rgba format. adjust opacity in rgba code |
 
 
 ### custom config + acquarium name:
