@@ -101,3 +101,22 @@ temp_max: "26"
 temp_min_range_ok: "18"
 temp_max_range_ok: "20"
 ```
+
+### full config:
+
+![all](example/full.jpg)
+
+```yaml
+type: 'custom:ph-meter'
+entity: sensor.ph_sensor
+temperature: sensor.temperatura_acquario
+name: acquarium n°1
+ph_state: sensor.ph
+tds: sensor.tds
+salinity: sensor.salinity
+ec: sensor.ec
+temp_high: input_number.acquario_temp_high
+temp_low: input_number.acquario_temp_low
+ph_high: input_number.acquario_ph_high
+ph_low: input_number.acquario_ph_low
+```
