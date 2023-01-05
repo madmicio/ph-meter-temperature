@@ -83,7 +83,7 @@ compact: true
 | `temp_max` | number | "30" |  | maximun temperature of the thermometer range |
 | `temp_min_range_ok` | number | "22" |  | minimum temperature of the comfort zone range. (green area of the gradient) |
 | `temp_max_range_ok` | number | "24" |  | maximum temperature of the comfort zone range. (green area of the gradient) |
-| `badge_color` | number | "rgba(21, 168, 224, 1)" |  | badge color backgroud; plese use olny rgba format. adjust opacity in rgba code |
+| `badge_color` | number | "rgba(21, 168, 224, 0.2)" |  | badge color backgroud; plese use olny rgba format. adjust opacity in rgba code |
 
 
 ### custom config + acquarium name:
