@@ -120,3 +120,24 @@ temp_low: input_number.acquario_temp_low
 ph_high: input_number.acquario_ph_high
 ph_low: input_number.acquario_ph_low
 ```
+
+### full config with desature color:
+
+![all](example/desature.jpg)
+
+```yaml
+type: 'custom:ph-meter'
+entity: sensor.ph_sensor
+temperature: sensor.temperatura_acquario
+name: acquarium n°1
+ph_state: sensor.ph
+tds: sensor.tds
+salinity: sensor.salinity
+ec: sensor.ec
+temp_high: input_number.acquario_temp_high
+temp_low: input_number.acquario_temp_low
+ph_high: input_number.acquario_ph_high
+ph_low: input_number.acquario_ph_low
+color_saturation: "50%"
+```
+
