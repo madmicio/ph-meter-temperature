@@ -16,6 +16,10 @@ class PhMeterCard extends LitElement {
   constructor() {
       super();
       this._show_slider = true;
+      this._show_alert_ph_high = true;
+      this._show_alert_ph_low = true;
+      this._show_alert_temp_high = true;
+      this._show_alert_temp_low = true;
   }
   render() {
     const stateObj = this.hass.states[this.config.entity];
@@ -48,9 +52,59 @@ class PhMeterCard extends LitElement {
     const temp_max_range_percent = Math.round((temp_max_range_ok_rel  / val_max_rel) * 100);
     const temp_min_range_percent_max = temp_min_range_percent + 10;
     const temp_max_range_percent_max = temp_max_range_percent + 10;
+    const show_alert = this.config.show_alert ? this.config.show_alert : false
+
+    if (this.config.temp_high && show_alert)   {
+      const temp_high_alert = this.hass.states[this.config.temp_high].state
+      if ( stateObj_2 > temp_high_alert && this._show_alert_temp_high == true) {
+            alert("la temperatura dell'acquario è troppo alta: " + stateObj_2) + "°" ;
+            this._show_alert_temp_high = false;
+          };
+      if ( stateObj_2 < temp_high_alert) {
+        this._show_alert_temp_high = true;
+        };
+    };
+
+    if (this.config.temp_low && show_alert)   {
+      const temp_low_alert = this.hass.states[this.config.temp_low].state
+      if ( stateObj_2 < temp_low_alert && this._show_alert_temp_low == true) {
+            alert("la temperatura dell'acquario è troppo bassa: " + stateObj_2 + "°" );
+            this._show_alert_temp_low = false;
+          };
+      if ( stateObj_2 > temp_low_alert) {
+        this._show_alert_temp_low = true;
+        };
+    };
+
+  
+
+    if (this.config.ph_high && show_alert)   {
+      const ph_high_alert = this.hass.states[this.config.ph_high].state
+      if ( stateObj_state > ph_high_alert && this._show_alert_ph_high == true) {
+            alert("il ph dell'acquario è troppo alto. Ph: " + stateObj_state) ;
+            this._show_alert_ph_high = false;
+    
+          };
+      if ( stateObj_state < ph_high_alert) {
+        this._show_alert_ph_high = true;
+        };
+    };
+
+    if (this.config.ph_low && show_alert)   {
+      const ph_low_alert = this.hass.states[this.config.ph_high].state
+      if ( stateObj_state > ph_low_alert && this._show_alert_ph_low == true) {
+            alert("il ph dell'acquario è troppo basso. Ph: " + stateObj_state) ;
+            this._show_alert_ph_low = false;
+    
+          };
+      if ( stateObj_state < ph_low_alert) {
+        this._show_alert_ph_low = true;
+        };
+    };
+
 
     return html`
-<div style="filter: saturate(${color_saturation}");
+<div id="card" style="filter: saturate(${color_saturation}");
 <!-- ################################################################ temperature ############################################################ -->
       ${this.config.temperature ? html`
         <div class="temperature-container" @click=${() => this._moreinfo(this.config.temperature)}>
@@ -85,9 +139,9 @@ class PhMeterCard extends LitElement {
                   .st2_icon{font-family:'Raleway';}
                   .st3_icon{font-size:30px;}
                 </style>
-                <div class="side_button" style="grid-template-columns:${this._show_slider ? '45% auto' : '9% auto'}; background-color:${badge_color};"  >
+                <div class="side_button ${stateObj_2 > this.hass.states[this.config.temp_high].state ? 'blink-bg' : ' ' }" style="grid-template-columns:${this._show_slider ? '45% auto' : '9% auto'}; background-color:${badge_color};"  >
                   <div class="text">high temp</div>
-                  <div class="side_button_area_icon" @click=${() => {this._show_slider = !this._show_slider}}>
+                  <div class="side_button_area_icon"  @click=${() => {this._show_slider = !this._show_slider}}>
                     <svg class="side_badge_icon" version="1.1" id="Livello_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                         viewBox="0 0 76 76" style="enable-background:new 0 0 76 76;" xml:space="preserve"  >
                       <linearGradient id="SVGID_1i_" gradientUnits="userSpaceOnUse" x1="-0.73" y1="-13.3767" x2="75.31" y2="-13.3767" gradientTransform="matrix(6.123234e-17 -1 -1 -6.123234e-17 24.6433 75.31)">
@@ -120,8 +174,9 @@ class PhMeterCard extends LitElement {
                       </div>
                     </div>
                 ` : html``}
+
               ${this.config.temp_low ? html`
-              <div class="side_button" style="grid-template-columns:${this._show_slider ? '45% auto' : '9% auto'}; background-color:${badge_color};" >
+              <div class="side_button ${stateObj_2 < this.hass.states[this.config.temp_low].state ? 'blink-bg' : ' ' }" style="grid-template-columns:${this._show_slider ? '45% auto' : '9% auto'}; background-color:${badge_color};" >
                 <div class="text">low temp</div>
                 <div class="side_button_area_icon">
                   <svg class="side_badge_icon" version="1.1" id="Livello_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -151,20 +206,22 @@ class PhMeterCard extends LitElement {
                       <form class="slider_box" oninput="result.value=(v.value)">
                         <output class="slider_value" name="result" for="v" @click=${() => {this._show_slider = !this._show_slider}}>${this.hass.states[this.config.temp_low].state}°</output>
                         <input class="slider" style="display:${this._show_slider ? 'none' : ' '};" type="range" id="v" name="v" value=${this.hass.states[this.config.temp_low].state} min=${this.hass.states[this.config.temp_low].attributes.min} max=${this.hass.states[this.config.temp_low].attributes.max} step=${this.hass.states[this.config.temp_low].attributes.step} @change=${e => this._setInputNumber(this.config.temp_low, e.target.value)} />
-                      </form>
+                        
+                        </form>
                     </div>
                   </div>
                 </div>    
               ` : html``}
+
               ${this.config.ph_high ? html`
-              <div class="side_button" style="grid-template-columns:${this._show_slider ? '45% auto' : '9% auto'}; background-color:${badge_color};"  >
+              <div class="side_button ${stateObj_state > this.hass.states[this.config.ph_high].state ? 'blink-bg' : ' ' }" style="grid-template-columns:${this._show_slider ? '45% auto' : '9% auto'}; background-color:${badge_color};"  >
                 <div class="text">high pH</div>
                 <div class="side_button_area_icon">
                   <svg class="side_badge_icon" version="1.1" id="Livello_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                       viewBox="0 0 76 76" style="enable-background:new 0 0 76 76;" xml:space="preserve" @click=${() => {this._show_slider = !this._show_slider}}>
                     <linearGradient id="SVGID_3_" gradientUnits="userSpaceOnUse" x1="-0.73" y1="-13.3767" x2="75.31" y2="-13.3767" gradientTransform="matrix(6.123234e-17 -1 -1 -6.123234e-17 24.6433 75.31)">
-                      <stop  offset="0" style="stop-color:#47BCC8"/>
-                      <stop  offset="1" style="stop-color:#482D87"/>
+                      <stop  offset="0" style="stop-color:#A41916"/>
+                      <stop  offset="1" style="stop-color:#D5D900"/>
                     </linearGradient>
                     <circle class="st0_icon3" cx="38" cy="38" r="38"/>
                     <text transform="matrix(1 0 0 1 16.0434 48.5881)" class="st1_icon st2_icon st3_icon">pH</text>
@@ -172,15 +229,16 @@ class PhMeterCard extends LitElement {
                     </div>  
                     <div class="side_button_area_slider">
                       <form class="slider_box" oninput="result.value=(v.value)">
-                        <output class="slider_value" name="result" for="v" @click=${() => {this._show_slider = !this._show_slider}}>${this.hass.states[this.config.ph_high].state}°</output>
-                        <input class="slider" style="display:${this._show_slider ? 'none' : ' '};" type="range" id="v" name="v" value=${this.hass.states[this.config.ph_high].state} min=${this.hass.states[this.config.ph_high].attributes.min} max=${this.hass.states[this.config.ph_high].attributes.max} step=${this.hass.states[this.config.ph_high].attributes.step} @change=${e => this._setInputNumber(this.config.ph_high, e.target.value)}/>
-                      </form>
+                        <output class="slider_value" name="result" for="v" @click=${() => {this._show_slider = !this._show_slider}}>${this.hass.states[this.config.ph_high].state}</output>
+                        <input class="slider" style="display:${this._show_slider ? 'none' : ' '};" type="range" id="v" name="v" value=${this.hass.states[this.config.ph_high].state} min=${this.hass.states[this.config.ph_high].attributes.min} max=${this.hass.states[this.config.ph_high].attributes.max} step="0.01" @change=${e => this._setInputNumber(this.config.ph_high, e.target.value)}/>
+                        
+                        </form>
                     </div>
                   </div>
                 </div>
               ` : html``}
               ${this.config.ph_low ? html`
-              <div class="side_button" style="grid-template-columns:${this._show_slider ? '45% auto' : '9% auto'}; background-color:${badge_color};"  >
+              <div class="side_button ${stateObj_state < this.hass.states[this.config.ph_low].state ? 'blink-bg' : ' ' }" style="grid-template-columns:${this._show_slider ? '45% auto' : '9% auto'}; background-color:${badge_color};"  >
                 <div class="text">low pH</div>
                 <div class="side_button_area_icon">
                   <svg class="side_badge_icon" version="1.1" id="Livello_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -195,8 +253,8 @@ class PhMeterCard extends LitElement {
                     </div>  
                     <div class="side_button_area_slider">
                       <form class="slider_box" oninput="result.value=(v.value)">
-                        <output class="slider_value" name="result" for="v" @click=${() => {this._show_slider = !this._show_slider}}>${this.hass.states[this.config.ph_low].state}°</output>
-                        <input class="slider" style="display:${this._show_slider ? 'none' : ' '};" type="range" id="v" name="v" value=${this.hass.states[this.config.ph_low].state} min=${this.hass.states[this.config.ph_low].attributes.min} max=${this.hass.states[this.config.ph_low].attributes.max} step=${this.hass.states[this.config.ph_low].attributes.step} @change=${e => this._setInputNumber(this.config.ph_low, e.target.value)}/>
+                        <output class="slider_value" name="result" for="v" @click=${() => {this._show_slider = !this._show_slider}}>${this.hass.states[this.config.ph_low].state}</output>
+                        <input class="slider" style="display:${this._show_slider ? 'none' : ' '};" type="range" id="v" name="v" value=${this.hass.states[this.config.ph_low].state} min=${this.hass.states[this.config.ph_low].attributes.min} max=${this.hass.states[this.config.ph_low].attributes.max} step="0.01" @change=${e => this._setInputNumber(this.config.ph_low, e.target.value)}/>
                       </form>
                     </div>
                   </div>
@@ -442,6 +500,16 @@ class PhMeterCard extends LitElement {
         value: value
     });
   }
+  
+  myFunction(phvalue) {
+    alert("il ph ha superato la soglia di alert. con valore: " + phvalue);
+  }
+
+  test(stateObj_state, ph_high_alert, phvalue ) {
+    if ( stateObj_state > ph_high_alert) {
+      alert("il ph ha superato la soglia di alert. con valore: " + phvalue);
+    }
+  }
 
 
     
@@ -450,8 +518,327 @@ class PhMeterCard extends LitElement {
   static get styles() {
     return css`
 
-:host{background:var(--ha-card-background, var(--card-background-color, white) );border-radius:var(--ha-card-border-radius, 4px);box-shadow:var(--ha-card-box-shadow, 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12) );color:var(--primary-text-color);display:block;transition:all .3s ease-out 0s;position:relative;padding-top:10px;filter:saturate(var(--color_saturation))}.flex-container-badge{display:flex;margin:10px}.svg-badge{max-width:33%;max-height:33%;cursor:pointer}.phmeter-container{display:grid;grid-template-columns:repeat(14,1fr);padding:10px;cursor:pointer}.temperature-container{display:grid;grid-template-columns:50px auto 100px auto 50px;grid-template-rows:30px auto;cursor:pointer}.ph-state-text{display:grid;grid-template-columns:70px auto 80px auto 70px;grid-template-rows:30px;padding:0 10px}.grid-max-temp,.grid-min-temp{//background-color:rgba(255,255,255,.8);//border:1px solid rgba(255,255,255,.8);grid-row:2/3;font-size:.9em;text-align:center;align-self:center;color:rgba(255,255,255,.7);font-weight:700}.grid-min-temp{grid-column:1/2}.grid-max-temp{grid-column:5/6}.grid-item,.grid-item-temp{background-color:rgba(255,255,255,.8);border:1px solid rgba(255,255,255,.8);font-size:1.2em;text-align:center;color:#fff;font-weight:700}.grid-item-temp{grid-column:1/15;grid-row:1/2;padding:20px 0}.grid-item{padding-top:150%;padding-bottom:20%}.grid-item-text-box,.ph_compact{color:var(--primary-text-color)}.grid-item-text-box{//background-color:rgba(255,255,255,.8);//border:1px solid rgba(255,255,255,.8);font-size:.8em;text-align:center;font-weight:700}.ph-logo-container{border-left:1px solid #15a8e0;border-bottom:1px solid #15a8e0;border-radius:30px;margin:20px 10px 5px}.ph-logo-container-logo{display:flex;margin-bottom:10px}.ph-logo-alert{display:flex;flex-direction:column;margin:20px 20px 0 12px;text-align:center;border-top:1px solid #15a8e0;border-radius:10px}.ph-logo-alert>svg{margin-bottom:4px}.slider-alert{display:grid;grid-template-columns:10% 90%;padding:40px 20px 0 12px}.slider-alert>div{align-self:center;margin-left:5px}.slider-alert>div>input{width:85%}.ph_compact{margin:20px 10px 0;padding:10px 0 5px;font-size:1.2em;text-align:left}.item-temp,.ph-cursor{grid-row:1/2;text-align:right;padding-top:8px;color:#fff;text-shadow:-1px 2px 4px rgba(0,0,0,.5),1px 1px 3px rgba(0,0,0,.5)}.ph-cursor{grid-column:1/15;background-color:transparent;font-size:2.9em}.item-temp{font-size:2.5em}.item-c-1,.item-temp,.ph-cursor-space{grid-column:1/15;background-color:transparent}.ph-cursor-space{grid-row:1/2;border-radius:5px;box-shadow:5px 5px 7px inset rgba(0,0,0,.5),-5px -5px 7px inset rgba(0,0,0,.5)}.item-row{grid-row:1/2}.temp-box-gradient{grid-column:1/6;grid-row:2/3;display:flex;flex-flow:row wrap;border-radius:5px;padding:0;margin:0 10px;list-style:none;box-shadow:5px 5px 7px inset rgba(0,0,0,.5),-5px -5px 7px inset rgba(0,0,0,.5)}.temp-vale-box{background:0 0;border:solid 3px #fff;border-radius:10px;padding:3px;width:30px;height:20px;line-height:20px;color:#fff;font-weight:700;font-size:.9em;text-align:center;margin:7px 0;box-shadow:-1px 2px 4px rgba(0,0,0,.5),1px 1px 3px rgba(0,0,0,.5),-1px 2px 4px inset rgba(0,0,0,.5),1px 1px 3px inset rgba(0,0,0,.5);text-shadow:-1px 2px 4px rgba(0,0,0,.5),1px 1px 3px rgba(0,0,0,.5)}.svg{grid-column:1/5;grid-row:1/5;padding:10% 40% 10% 10%}.ph_state{grid-column:3/4;grid-row:3/4;font-size:150%;color:#15a8e0;text-align:left}.svg-ph-state{grid-column:2/4;grid-row:2/3;width:100%;height:auto}.ph-value-text{transform:translate(8px,123px);font-size:162px;fill:#15a8e0}.name{grid-column:1/5;grid-row:4/5;color:#15a8e0;font-size:1.5em;align-self:flex-end;text-align:right;margin-right:7%}.side_badge_icon{grid-column:1/2;grid-row:2/3}.alert_back{display:flex;padding:3px;width:100%}.side_button{display:grid;grid-template-rows:1vw 2vw;border-radius:10px;margin:3px 0;grid-template-areas:"name name""icon slider"}.side_button_area_icon,.text{align-self:center;padding-left:10px}.text{grid-area:name;padding-top:.2vw;text-align:left;font-size:.6vw}.side_button_area_icon{grid-area:icon;cursor:pointer}.side_button_area_slider{grid-area:slider;align-self:center}.slider_value{font-size:.8vw;padding:8px;width:10%;cursor:pointer}.slider{align-self:center;width:90%}.slider_box{display:flex;padding-right:13px}.ph_name_full{display:flex;flex-flow:column;justify-content:space-between;color:#15a8e0}
-
+    :host {
+      background: var(--ha-card-background, var(--card-background-color, white) );
+      border-radius: var(--ha-card-border-radius, 4px);
+      box-shadow: var(--ha-card-box-shadow, 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12) );
+      color: var(--primary-text-color);
+      display: block;
+      transition: all .3s ease-out 0s;
+      position: relative;
+      padding-top: 10px;
+      filter: saturate(var(--color_saturation));
+  }
+  
+    .flex-container-badge {
+      display: flex;
+      margin: 10px;
+  
+    }
+  
+    .svg-badge {
+      max-width: 33%;
+      max-height: 33%;
+           // or any other units or measurements you want
+       }
+  
+  .phmeter-container {
+      display: grid;
+      grid-template-columns: repeat(14,1fr);
+      // grid-template-rows: auto auto;
+      padding: 10px;
+      
+  }
+  
+  
+  .temperature-container {
+      display: grid;
+      grid-template-columns: 50px auto 100px auto 50px;
+      grid-template-rows: 30px auto
+  }
+  
+  .ph-state-text {
+      display: grid;
+      grid-template-columns: 70px auto 80px auto 70px;
+      grid-template-rows: 30px;
+      padding: 0 10px
+  }
+  
+  .grid-max-temp,.grid-min-temp {
+      //background-color: rgba(255,255,255,.8);
+      //border: 1px solid rgba(255,255,255,.8);
+      grid-row: 2/3;
+      font-size: .9em;
+      text-align: center;
+      align-self: center;
+      color: rgba(255,255,255,.7);
+      font-weight: 700
+  }
+  
+  .grid-min-temp {
+      grid-column: 1/2
+  }
+  
+  .grid-max-temp {
+      grid-column: 5/6
+  }
+  
+  .grid-item,.grid-item-temp {
+      background-color: rgba(255,255,255,.8);
+      border: 1px solid rgba(255,255,255,.8);
+      font-size: 1.2em;
+      text-align: center;
+      color: #fff;
+      font-weight: 700
+  }
+  
+  .grid-item-temp {
+      grid-column: 1/15;
+      grid-row: 1/2;
+      padding: 20px 0
+  }
+  
+  .grid-item {
+      padding-top: 150%;
+      padding-bottom: 20%
+  }
+  
+  .grid-item-text-box,.ph_compact {
+      color: var(--primary-text-color)
+  }
+  
+  .grid-item-text-box {
+      //background-color: rgba(255,255,255,.8);
+      //border: 1px solid rgba(255,255,255,.8);
+      font-size: .8em;
+      text-align: center;
+      font-weight: 700
+  }
+  
+  .ph-logo-container {
+    border-left: 1px solid #15a8e0;
+    border-bottom: 1px solid #15a8e0;
+    border-radius: 30px;
+    margin: 20px 10px 5px
+  }
+  
+  .ph-logo-container-logo {
+    display: flex;
+    margin-bottom: 10px;
+  
+  }
+  
+  .ph-logo-alert {
+    display: flex;
+    flex-direction: column;
+    // width:20%; 
+    margin: 20px 20px 0px 12px ;
+    text-align: center;
+    border-top: 1px solid #15a8e0;
+    border-radius: 10px
+  }
+  .ph-logo-alert > svg {
+    margin-bottom: 4px ;
+  }
+  
+  .slider-alert {
+    display: grid;
+    grid-template-columns: 10% 90% ;
+    padding: 40px 20px 0px 12px ;
+  }
+  
+  .slider-alert > div {
+    align-self: center;
+    margin-left: 5px;
+  }
+  .slider-alert > div > input {
+    width: 85%;
+  }
+  
+  
+  .ph_compact {
+      margin: 20px 10px 0;
+      padding: 10px 0 5px;
+      font-size: 1.2em;
+      text-align: left
+  }
+  
+  .item-temp,.ph-cursor {
+      grid-row: 1/2;
+      text-align: right;
+      padding-top: 8px;
+      color: #fff;
+      text-shadow: -1px 2px 4px rgba(0,0,0,.5),1px 1px 3px rgba(0,0,0,.5)
+  }
+  
+  .ph-cursor {
+      grid-column: 1/15;
+      background-color: transparent;
+      font-size: 2.9em
+  }
+  
+  .item-temp {
+      font-size: 2.5em
+  }
+  
+  .item-c-1,.item-temp,.ph-cursor-space {
+      grid-column: 1/15;
+      background-color: transparent
+  }
+  
+  .ph-cursor-space {
+      grid-row: 1/2;
+      border-radius: 5px;
+      box-shadow: 5px 5px 7px inset rgba(0,0,0,.5),-5px -5px 7px inset rgba(0,0,0,.5)
+  }
+  
+  .item-row {
+      grid-row: 1/2
+  }
+  
+  .temp-box-gradient {
+      grid-column: 1/6;
+      grid-row: 2/3;
+      display: flex;
+      flex-flow: row wrap;
+      border-radius: 5px;
+      padding: 0;
+      margin: 0 10px;
+      list-style: none;
+      box-shadow: 5px 5px 7px inset rgba(0,0,0,.5),-5px -5px 7px inset rgba(0,0,0,.5)
+  }
+  
+  .temp-vale-box {
+      background: 0 0;
+      border: solid 3px #fff;
+      border-radius: 10px;
+      padding: 3px;
+      width: 30px;
+      height: 20px;
+      line-height: 20px;
+      color: #fff;
+      font-weight: 700;
+      font-size: .9em;
+      text-align: center;
+      margin: 7px 0;
+      box-shadow: -1px 2px 4px rgba(0,0,0,.5),1px 1px 3px rgba(0,0,0,.5),-1px 2px 4px inset rgba(0,0,0,.5),1px 1px 3px inset rgba(0,0,0,.5);
+      text-shadow: -1px 2px 4px rgba(0,0,0,.5),1px 1px 3px rgba(0,0,0,.5)
+  }
+  
+  
+  .svg {
+      grid-column: 1/5;
+      grid-row: 1/5;
+      padding: 10% 40% 10% 10%
+  }
+  
+  .ph_state {
+      grid-column: 3/4;
+      grid-row: 3/4;
+      font-size: 150%;
+      color: #15a8e0;
+      text-align: left
+  }
+  
+  .svg-ph-state {
+      grid-column: 2/4;
+      grid-row: 2/3;
+      width: 100%;
+      height: auto
+  }
+  
+  .ph-value-text {
+      transform: translate(8px,123px);
+      font-size: 162px;
+      fill: #15a8e0
+  }
+  
+  .name {
+      grid-column: 1/5;
+      grid-row: 4/5;
+      color: #15a8e0;
+      font-size: 1.5em;
+      align-self: flex-end;
+      text-align: right;
+      margin-right: 7%
+  }
+  
+  .side_badge_icon {
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+    // grid-area: icon;
+  
+  }
+  
+  .alert_back {
+    display: flex;
+    padding: 3px;
+    width: 100%;
+  }
+  
+  
+  .side_button {
+    display: grid;
+    grid-template-rows: 1vw 2vw;
+    border-radius: 10px;
+    margin: 3px 0px 3px 0px;
+    grid-template-areas: 
+      "name name"
+      "icon slider";
+  }
+  
+  .text {
+    grid-area: name;
+    // margin: 4px 0px 2px 0px;
+    padding-top: 0.2vw;
+    text-align: left;
+    align-self: center;
+    padding-left: 10px;
+    font-size: 0.6vw;
+  }
+  .side_button_area_icon {
+    grid-area: icon;
+    align-self: center;
+    padding-left: 10px;
+  }
+  .side_button_area_slider {
+    grid-area: slider;
+    align-self: center;
+  }
+  
+  .slider_value {
+    font-size: 0.8vw;
+    padding: 8px;
+    width: 10%;
+   
+  }
+  .slider {
+    align-self: center;
+    width: 90%;
+   // display: none;
+  }
+  
+  
+  .slider_box {
+    display: flex;
+    padding-right: 13px;
+   
+  }
+  
+  .ph_name_full {
+    display: flex;
+    flex-flow: column; 
+    justify-content: space-between;
+    color: #15a8e0;
+  }
+  .blink-bg{
+		animation: blinkingBackground 2s infinite;
+	}
+	@keyframes blinkingBackground{
+		0%		{ background-color: transparent;}
+		50%		{ background-color: red; color: white;}
+		100%	{ background-color: transparent;}
+	}
     `;
   }
 }
