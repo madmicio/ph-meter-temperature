@@ -1,5 +1,5 @@
 # pH-meter-Temperature
-ph meter & temperature for aquarium
+ph meter & temperature for aquarium & swimming pool
 
 
 [![buymeacoffee_badge](https://img.shields.io/badge/Donate-buymeacoffe-ff813f?style=flat)](https://www.buymeacoffee.com/madmicio)
@@ -85,6 +85,7 @@ compact: true
 | `temp_max_range_ok` | number | "24" |  | maximum temperature of the comfort zone range. (green area of the gradient) |
 | `badge_color` | number | "rgba(21, 168, 224, 0.2)" |  | badge color backgroud; plese use olny rgba format. adjust opacity in rgba code |
 | `color_desaturation` | number | "100" |  | use this option to make the colors less saturated |
+| `show_alert` |boolean| false |  | alert popup |
 
 ### custom config + acquarium name:
 
@@ -101,6 +102,7 @@ temp_max: "26"
 temp_min_range_ok: "18"
 temp_max_range_ok: "20"
 ```
+
 ### full config:
 
 ![all](example/full.jpg)
@@ -139,6 +141,33 @@ ph_high: input_number.acquario_ph_high
 ph_low: input_number.acquario_ph_low
 color_saturation: "50%"
 ```
+
+### alert popup:
+
+![all](example/popup.jpg)
+
+
+note: this popup stop the render of the page. it is designed to warn of critical conditions in the aquarium which threaten the life of the fish. it is meant to be invasive in order to be surely read by the user.
+
+useless to enable it to monitor the water of a swimming pool
+
+```yaml
+type: 'custom:ph-meter'
+entity: sensor.ph_sensor
+temperature: sensor.temperatura_acquario
+name: acquarium n°1
+ph_state: sensor.ph
+tds: sensor.tds
+salinity: sensor.salinity
+ec: sensor.ec
+temp_high: input_number.acquario_temp_high
+temp_low: input_number.acquario_temp_low
+ph_high: input_number.acquario_ph_high
+ph_low: input_number.acquario_ph_low
+show_alert: true
+```
+
+
 ## to use badges for alerts you need to configure input numbers in home assistant
 ```yaml
 acquario_temp_high:
