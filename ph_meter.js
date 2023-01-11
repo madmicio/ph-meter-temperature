@@ -129,137 +129,135 @@ class PhMeterCard extends LitElement {
               <div class="alert_back">
                 <div style="font-size:14px;width: 100%;">${this._show_slider ? 'alert' : 'alert value settings'}</div>
               </div>
-                ${this.config.temp_high ? html`
-                <style type="text/css">
-                  .st0_icon{fill:url(#SVGID_1i_);}
-                  .st0_icon2{fill:url(#SVGID_2_);}
-                  .st0_icon3{fill:url(#SVGID_3_);}
-                  .st0_icon4{fill:url(#SVGID_4_);}
-                  .st1_icon{fill:#FFFFFF;}
-                  .st2_icon{font-family:'Raleway';}
-                  .st3_icon{font-size:30px;}
-                </style>
-                <div class="side_button ${stateObj_2 > this.hass.states[this.config.temp_high].state ? 'blink-bg' : ' ' }" style="grid-template-columns:${this._show_slider ? '45% auto' : '9% auto'}; background-color:${badge_color};"  >
-                  <div class="text">high temp</div>
-                  <div class="side_button_area_icon"  @click=${() => {this._show_slider = !this._show_slider}}>
-                    <svg class="side_badge_icon" version="1.1" id="Livello_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                        viewBox="0 0 76 76" style="enable-background:new 0 0 76 76;" xml:space="preserve"  >
-                      <linearGradient id="SVGID_1i_" gradientUnits="userSpaceOnUse" x1="-0.73" y1="-13.3767" x2="75.31" y2="-13.3767" gradientTransform="matrix(6.123234e-17 -1 -1 -6.123234e-17 24.6433 75.31)">
+                  <style type="text/css">
+                    .blink-bg{
+                      animation: blinkingBackground 2s infinite;
+                    }
+                    @keyframes blinkingBackground{
+                      0%		{ fill: transparent;}
+                      50%		{ fill: orangered;}
+                      100%	{ fill: transparent;}
+                    }
+
+                    .st1_icon{fill:#FFFFFF;}
+                    .st2_icon{font-family:'Raleway';}
+                    .st3_icon{font-size:14px;}
+                    .st4_1_icon{fill:url(#SVGID_1_icon);}
+                    .st4_2_icon{fill:url(#SVGID_2_icon);}
+                    .st4_3_icon{fill:url(#SVGID_3_icon);}
+                    .st4_4_icon{fill:url(#SVGID_4_icon);}
+                    .st5_icon{font-size:16px;}
+                    .st6_icon{fill:transparent;cursor: pointer;}
+                    .st_leftbadge_background{fill:${badge_color}}
+                    .st_primary_text_color{fill:var(--primary-text-color)}
+                  </style>
+                  ${this.config.temp_high? html`
+                    <svg  version="1.1" id="Livello_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                        viewBox="0 0 ${this._show_slider ? '109.7' : '532'} 75" style="enable-background:new 0 0 ${this._show_slider ? '109.7' : '532'} 75;" xml:space="preserve">
+                    <path class="st_leftbadge_background ${stateObj_2 > this.hass.states[this.config.temp_high].state ? 'blink-bg' : ' ' }" d="${this._show_slider ? 'M97.7,64.3H12c-6.6,0-12-5.4-12-12V12C0,5.4,5.4,0,12,0h85.7c6.6,0,12,5.4,12,12v40.3C109.7,58.9,104.3,64.3,97.7,64.3z' : 'M520,64.3H12c-6.6,0-12-5.4-12-12V12C0,5.4,5.4,0,12,0h508c6.6,0,12,5.4,12,12v40.3C532,58.9,526.6,64.3,520,64.3z'}"/>
+                    <text transform="matrix(1.0139 0 0 1 7.8831 13.6756)" class="st_primary_text_color st2_icon st3_icon">high temp</text>
+                    <linearGradient id="SVGID_1_icon" gradientUnits="userSpaceOnUse" x1="90.2718" y1="71.4865" x2="132.8441" y2="71.4865" gradientTransform="matrix(6.123234e-17 -1 -1 -6.123234e-17 100.6557 151.3224)">
                         <stop  offset="0" style="stop-color:#D5D900"/>
                         <stop  offset="1" style="stop-color:#A41916"/>
-                      </linearGradient>
-                      <circle class="st0_icon" cx="38" cy="38" r="38"/>
+                    </linearGradient>
+                    <circle class="st4_1_icon" cx="27.5" cy="38.1" r="19.6" />
+                    <g>
                       <g>
-                        <g>
-                          <path class="st1_icon" d="M37.1,44V21c0-3.2-2.2-6.1-5.3-6.8c-4.3-0.9-8.1,2.4-8.1,6.6V44c0,0.2-0.1,0.4-0.2,0.5
-                            c-2.9,2.8-4.1,7.1-2.4,11.3c1.2,2.9,3.7,5.2,6.7,5.9c6.8,1.7,12.8-3.3,12.8-9.8c0-2.8-1.2-5.5-3.2-7.4
-                            C37.2,44.4,37.1,44.2,37.1,44L37.1,44z M28.1,59.3c-2-0.6-3.7-2-4.6-3.8c-1.9-3.7-0.6-7.7,2.3-9.8c0.2-0.2,0.3-0.3,0.3-0.6V21
-                            c0-2.2,1.6-4.3,3.8-4.5c2.5-0.2,4.7,1.8,4.7,4.2v24.3c0,0.2,0.1,0.4,0.3,0.6c1.9,1.5,3.1,3.7,3.1,6.2C38,56.9,33.3,60.7,28.1,59.3
-                            L28.1,59.3z"/>
-                          <path class="st1_icon" d="M32.2,47V22.9c0-1-0.8-1.8-1.8-1.8s-1.8,0.8-1.8,1.8v24c-2,0.8-3.4,2.7-3.4,4.9c0,2.9,2.3,5.2,5.2,5.2
-                            c2.9,0,5.2-2.3,5.2-5.2C35.6,49.6,34.1,47.7,32.2,47L32.2,47z"/>
-                          <path class="st1_icon" d="M55.3,33.6L50,28.3c-0.7-0.7-1.8-0.7-2.5,0l-5.2,5.3c-0.7,0.7-0.7,1.8,0,2.5s1.8,0.7,2.5,0l2.3-2.3v12.7
-                            c0,1,0.8,1.8,1.8,1.8s1.8-0.8,1.8-1.8V33.9l2.3,2.3c0.3,0.3,0.8,0.5,1.3,0.5s0.9-0.2,1.3-0.5C56.1,35.4,56.1,34.3,55.3,33.6
-                            L55.3,33.6z"/>
-                        </g>
+                        <path class="st1_icon" d="M27,40.7V30.5c0-1.4-1-2.7-2.4-3c-1.9-0.4-3.6,1.1-3.6,2.9v10.3c0,0.1,0,0.2-0.1,0.2c-1.3,1.2-1.8,3.2-1.1,5
+                          c0.5,1.3,1.6,2.3,3,2.6c3,0.8,5.7-1.5,5.7-4.4c0-1.3-0.5-2.5-1.4-3.3C27.1,40.9,27,40.8,27,40.7L27,40.7z M23.1,47.5
+                          c-0.9-0.2-1.6-0.9-2-1.7c-0.8-1.6-0.3-3.4,1-4.3c0.1-0.1,0.1-0.2,0.1-0.2V30.5c0-1,0.7-1.9,1.7-2c1.1-0.1,2.1,0.8,2.1,1.9v10.8
+                          c0,0.1,0,0.2,0.1,0.2c0.9,0.7,1.4,1.7,1.4,2.8C27.5,46.5,25.4,48.2,23.1,47.5L23.1,47.5z"/>
+                        <path class="st1_icon" d="M24.9,42.1V31.3c0-0.4-0.4-0.8-0.8-0.8s-0.8,0.4-0.8,0.8V42c-0.9,0.3-1.5,1.2-1.5,2.2c0,1.3,1,2.3,2.3,2.3
+                          c1.3,0,2.3-1,2.3-2.3C26.4,43.2,25.7,42.4,24.9,42.1L24.9,42.1z"/>
+                        <path class="st1_icon" d="M35.2,36.1l-2.4-2.4c-0.3-0.3-0.8-0.3-1.1,0l-2.3,2.4c-0.3,0.3-0.3,0.8,0,1.1s0.8,0.3,1.1,0l1-1v5.6
+                          c0,0.4,0.4,0.8,0.8,0.8c0.4,0,0.8-0.4,0.8-0.8v-5.7l1,1c0.2,0.2,0.4,0.2,0.6,0.2s0.4-0.1,0.6-0.2C35.5,36.9,35.5,36.4,35.2,36.1
+                          L35.2,36.1z"/>
                       </g>
-                      </svg>
-                      </div>  
-                        <div class="side_button_area_slider">
-                          <form class="slider_box" oninput="result.value=(v.value)">
-                            <output class="slider_value" name="result" for="v" @click=${() => {this._show_slider = !this._show_slider}}>${this.hass.states[this.config.temp_high].state}°</output>
-                            <input class="slider" style="display:${this._show_slider ? 'none' : ' '};"type="range" id="v" name="v" value=${this.hass.states[this.config.temp_high].state} min=${this.hass.states[this.config.temp_high].attributes.min} max=${this.hass.states[this.config.temp_high].attributes.max} step=${this.hass.states[this.config.temp_high].attributes.step} @change=${e => this._setInputNumber(this.config.temp_high, e.target.value)} />
-                          </form>
-                        </div>
-                      </div>
-                    </div>
-                ` : html``}
+                    </g>
+                    <foreignobject transform="matrix(0.84 0 0 0.9 55 24)"  width="100%" height="100%">
+                    <form class="slider_box" oninput="result.value=(v.value)">
+                      <output class="slider_value" name="result" for="v" >${this.hass.states[this.config.temp_high].state}</output>
+                      <input class="slider" style="display:${this._show_slider ? 'none' : ' '};" type="range" id="v" name="v" value=${this.hass.states[this.config.temp_high].state} min=${this.hass.states[this.config.temp_high].attributes.min} max=${this.hass.states[this.config.temp_high].attributes.max} step=${this.hass.states[this.config.temp_high].attributes.step} @change=${e => this._setInputNumber(this.config.temp_high, e.target.value)}/>
+                    </form>
+                    </foreignobject>
+                    <path @click=${() => {this._show_slider = !this._show_slider}} class="st6_icon" d="M97.7,64.3H12c-6.6,0-12-5.4-12-12V12C0,5.4,5.4,0,12,0h85.7c6.6,0,12,5.4,12,12v40.3C109.7,58.9,104.3,64.3,97.7,64.3z"/>
+                    </svg>
 
-              ${this.config.temp_low ? html`
-              <div class="side_button ${stateObj_2 < this.hass.states[this.config.temp_low].state ? 'blink-bg' : ' ' }" style="grid-template-columns:${this._show_slider ? '45% auto' : '9% auto'}; background-color:${badge_color};" >
-                <div class="text">low temp</div>
-                <div class="side_button_area_icon">
-                  <svg class="side_badge_icon" version="1.1" id="Livello_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                      viewBox="0 0 76 76" style="enable-background:new 0 0 76 76;" xml:space="preserve" @click=${() => {this._show_slider = !this._show_slider}} >
-                    <linearGradient id="SVGID_2_" gradientUnits="userSpaceOnUse" x1="-0.73" y1="-13.3767" x2="75.31" y2="-13.3767" gradientTransform="matrix(6.123234e-17 -1 -1 -6.123234e-17 24.6433 75.31)">
+                    ` : html``}
+                  ${this.config.temp_low? html`
+                    <svg version="1.1" id="Livello_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                      viewBox="0 0 ${this._show_slider ? '109.7' : '532'} 75" style="enable-background:new 0 0 ${this._show_slider ? '109.7' : '532'} 75;" xml:space="preserve">
+                    <path class="st_leftbadge_background ${stateObj_2 < this.hass.states[this.config.temp_low].state ? 'blink-bg' : ' ' }" d="${this._show_slider ? 'M97.7,64.3H12c-6.6,0-12-5.4-12-12V12C0,5.4,5.4,0,12,0h85.7c6.6,0,12,5.4,12,12v40.3C109.7,58.9,104.3,64.3,97.7,64.3z' : 'M520,64.3H12c-6.6,0-12-5.4-12-12V12C0,5.4,5.4,0,12,0h508c6.6,0,12,5.4,12,12v40.3C532,58.9,526.6,64.3,520,64.3z'}"/>
+                    <text transform="matrix(1.0139 0 0 1 7.8831 13.6756)" class="st_primary_text_color st2_icon st3_icon">low temp</text>
+                    <linearGradient id="SVGID_2_icon" gradientUnits="userSpaceOnUse" x1="90.2718" y1="71.4865" x2="132.8441" y2="71.4865" gradientTransform="matrix(6.123234e-17 -1 -1 -6.123234e-17 100.6557 151.3224)">
                       <stop  offset="0" style="stop-color:#0000B3"/>
                       <stop  offset="1" style="stop-color:#0099B3"/>
                     </linearGradient>
-                    <circle class="st0_icon2" cx="38" cy="38" r="38"/>
+                    <circle class="st4_2_icon" cx="27.5" cy="38.1" r="19.6" />
                     <g>
                       <g>
-                        <path class="st1_icon" d="M37.1,44V21c0-3.2-2.2-6.1-5.3-6.8c-4.3-0.9-8.1,2.4-8.1,6.6V44c0,0.2-0.1,0.4-0.2,0.5
-                          c-2.9,2.8-4.1,7.1-2.4,11.3c1.2,2.9,3.7,5.2,6.7,5.9c6.8,1.7,12.8-3.3,12.8-9.8c0-2.8-1.2-5.5-3.2-7.4
-                          C37.2,44.4,37.1,44.2,37.1,44L37.1,44z M28.1,59.3c-2-0.6-3.7-2-4.6-3.8c-1.9-3.7-0.6-7.7,2.3-9.8c0.2-0.2,0.3-0.3,0.3-0.6V21
-                          c0-2.2,1.6-4.3,3.8-4.5c2.5-0.2,4.7,1.8,4.7,4.2v24.3c0,0.2,0.1,0.4,0.3,0.6c1.9,1.5,3.1,3.7,3.1,6.2C38,56.9,33.3,60.7,28.1,59.3
-                          L28.1,59.3z"/>
-                        <path class="st1_icon" d="M32.2,47v-5.8c0-1-0.8-1.8-1.8-1.8s-1.8,0.8-1.8,1.8V47c-2,0.8-3.4,2.7-3.4,4.9c0,2.9,2.3,5.2,5.2,5.2
-                          c2.9,0,5.2-2.3,5.2-5.2C35.6,49.6,34.1,47.7,32.2,47L32.2,47z"/>
-                        <path class="st1_icon" d="M42.3,42.5l5.3,5.3c0.7,0.7,1.8,0.7,2.5,0l5.2-5.3c0.7-0.7,0.7-1.8,0-2.5s-1.8-0.7-2.5,0l-2.3,2.3V29.6
-                          c0-1-0.8-1.8-1.8-1.8S47,28.6,47,29.6v12.7L44.7,40c-0.3-0.3-0.8-0.5-1.3-0.5s-0.9,0.2-1.3,0.5C41.6,40.7,41.6,41.9,42.3,42.5
-                          L42.3,42.5z"/>
+                        <path class="st1_icon" d="M27,40.7V30.5c0-1.4-1-2.7-2.4-3c-1.9-0.4-3.6,1.1-3.6,2.9v10.3c0,0.1,0,0.2-0.1,0.2c-1.3,1.2-1.8,3.2-1.1,5
+                          c0.5,1.3,1.6,2.3,3,2.6c3,0.8,5.7-1.5,5.7-4.4c0-1.3-0.5-2.5-1.4-3.3C27.1,40.9,27,40.8,27,40.7L27,40.7z M23.1,47.5
+                          c-0.9-0.2-1.6-0.9-2-1.7c-0.8-1.6-0.3-3.4,1-4.3c0.1-0.1,0.1-0.2,0.1-0.2V30.5c0-1,0.7-1.9,1.7-2c1.1-0.1,2.1,0.8,2.1,1.9v10.8
+                          c0,0.1,0,0.2,0.1,0.2c0.9,0.7,1.4,1.7,1.4,2.8C27.5,46.5,25.4,48.2,23.1,47.5L23.1,47.5z"/>
+                        <path class="st1_icon" d="M24.9,42.1V31.3c0-0.4-0.4-0.8-0.8-0.8s-0.8,0.4-0.8,0.8V42c-0.9,0.3-1.5,1.2-1.5,2.2c0,1.3,1,2.3,2.3,2.3
+                          c1.3,0,2.3-1,2.3-2.3C26.4,43.2,25.7,42.4,24.9,42.1L24.9,42.1z"/>
+                        <path class="st1_icon" d="M29.4,40.1l2.4,2.4c0.3,0.3,0.8,0.3,1.1,0l2.3-2.4c0.3-0.3,0.3-0.8,0-1.1s-0.8-0.3-1.1,0l-1,1v-5.6
+                          c0-0.4-0.4-0.8-0.8-0.8c-0.4,0-0.8,0.4-0.8,0.8V40l-1-1c-0.2-0.2-0.4-0.2-0.6-0.2c-0.2,0-0.4,0.1-0.6,0.2
+                          C29,39.3,29,39.8,29.4,40.1L29.4,40.1z"/>
                       </g>
                     </g>
+                    <foreignobject transform="matrix(0.84 0 0 0.9 55 24)"  width="100%" height="100%">
+                    <form class="slider_box" oninput="result.value=(v.value)">
+                      <output class="slider_value" name="result" for="v" >${this.hass.states[this.config.temp_low].state}</output>
+                      <input class="slider" style="display:${this._show_slider ? 'none' : ' '};" type="range" id="v" name="v" value=${this.hass.states[this.config.temp_low].state} min=${this.hass.states[this.config.temp_low].attributes.min} max=${this.hass.states[this.config.temp_low].attributes.max} step=${this.hass.states[this.config.temp_low].attributes.step} @change=${e => this._setInputNumber(this.config.temp_low, e.target.value)}/>
+                    </form>
+                    </foreignobject>
+                    <path @click=${() => {this._show_slider = !this._show_slider}} class="st6_icon" d="M97.7,64.3H12c-6.6,0-12-5.4-12-12V12C0,5.4,5.4,0,12,0h85.7c6.6,0,12,5.4,12,12v40.3C109.7,58.9,104.3,64.3,97.7,64.3z"/>
                     </svg>
-                    </div>  
-                    <div class="side_button_area_slider">
+                    ` : html``}
+                    ${this.config.ph_high ? html`
+                      <svg version="1.1" id="Livello_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                        viewBox="0 0 ${this._show_slider ? '109.7' : '532'} 75" style="enable-background:new 0 0 ${this._show_slider ? '109.7' : '532'} 75;" xml:space="preserve">
+                      <path class="st_leftbadge_background ${stateObj_state > this.hass.states[this.config.ph_high].state ? 'blink-bg' : ' ' }" d="${this._show_slider ? 'M97.7,64.3H12c-6.6,0-12-5.4-12-12V12C0,5.4,5.4,0,12,0h85.7c6.6,0,12,5.4,12,12v40.3C109.7,58.9,104.3,64.3,97.7,64.3z' : 'M520,64.3H12c-6.6,0-12-5.4-12-12V12C0,5.4,5.4,0,12,0h508c6.6,0,12,5.4,12,12v40.3C532,58.9,526.6,64.3,520,64.3z'}"/>
+                      <text transform="matrix(1.0139 0 0 1 7.8831 13.6756)" class="st_primary_text_color st2_icon st3_icon">high pH</text>
+                      <linearGradient id="SVGID_3_icon" gradientUnits="userSpaceOnUse" x1="90.2718" y1="71.4865" x2="132.8441" y2="71.4865" gradientTransform="matrix(6.123234e-17 -1 -1 -6.123234e-17 100.6557 151.3224)">
+                        <stop  offset="0" style="stop-color:#01ced1"/>
+                        <stop  offset="1" style="stop-color:#4224aa"/>
+                      </linearGradient>
+                      <circle class="st4_3_icon" cx="27.5" cy="38.1" r="19.6" />
+                      <text transform="matrix(0.9253 0 0 1 15.6927 43.3791)" class="st1_icon st2_icon st5_icon">pH</text>
+                      <foreignobject transform="matrix(0.84 0 0 0.9 55 24)"  width="100%" height="100%">
                       <form class="slider_box" oninput="result.value=(v.value)">
-                        <output class="slider_value" name="result" for="v" @click=${() => {this._show_slider = !this._show_slider}}>${this.hass.states[this.config.temp_low].state}°</output>
-                        <input class="slider" style="display:${this._show_slider ? 'none' : ' '};" type="range" id="v" name="v" value=${this.hass.states[this.config.temp_low].state} min=${this.hass.states[this.config.temp_low].attributes.min} max=${this.hass.states[this.config.temp_low].attributes.max} step=${this.hass.states[this.config.temp_low].attributes.step} @change=${e => this._setInputNumber(this.config.temp_low, e.target.value)} />
-                        
-                        </form>
-                    </div>
-                  </div>
-                </div>    
-              ` : html``}
-
-              ${this.config.ph_high ? html`
-              <div class="side_button ${stateObj_state > this.hass.states[this.config.ph_high].state ? 'blink-bg' : ' ' }" style="grid-template-columns:${this._show_slider ? '45% auto' : '9% auto'}; background-color:${badge_color};"  >
-                <div class="text">high pH</div>
-                <div class="side_button_area_icon">
-                  <svg class="side_badge_icon" version="1.1" id="Livello_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                      viewBox="0 0 76 76" style="enable-background:new 0 0 76 76;" xml:space="preserve" @click=${() => {this._show_slider = !this._show_slider}}>
-                    <linearGradient id="SVGID_3_" gradientUnits="userSpaceOnUse" x1="-0.73" y1="-13.3767" x2="75.31" y2="-13.3767" gradientTransform="matrix(6.123234e-17 -1 -1 -6.123234e-17 24.6433 75.31)">
-                      <stop  offset="0" style="stop-color:#A41916"/>
-                      <stop  offset="1" style="stop-color:#D5D900"/>
-                    </linearGradient>
-                    <circle class="st0_icon3" cx="38" cy="38" r="38"/>
-                    <text transform="matrix(1 0 0 1 16.0434 48.5881)" class="st1_icon st2_icon st3_icon">pH</text>
-                    </svg>
-                    </div>  
-                    <div class="side_button_area_slider">
-                      <form class="slider_box" oninput="result.value=(v.value)">
-                        <output class="slider_value" name="result" for="v" @click=${() => {this._show_slider = !this._show_slider}}>${this.hass.states[this.config.ph_high].state}</output>
+                        <output class="slider_value" name="result" for="v" >${this.hass.states[this.config.ph_high].state}</output>
                         <input class="slider" style="display:${this._show_slider ? 'none' : ' '};" type="range" id="v" name="v" value=${this.hass.states[this.config.ph_high].state} min=${this.hass.states[this.config.ph_high].attributes.min} max=${this.hass.states[this.config.ph_high].attributes.max} step="0.01" @change=${e => this._setInputNumber(this.config.ph_high, e.target.value)}/>
-                        
-                        </form>
-                    </div>
-                  </div>
-                </div>
-              ` : html``}
-              ${this.config.ph_low ? html`
-              <div class="side_button ${stateObj_state < this.hass.states[this.config.ph_low].state ? 'blink-bg' : ' ' }" style="grid-template-columns:${this._show_slider ? '45% auto' : '9% auto'}; background-color:${badge_color};"  >
-                <div class="text">low pH</div>
-                <div class="side_button_area_icon">
-                  <svg class="side_badge_icon" version="1.1" id="Livello_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                      viewBox="0 0 76 76" style="enable-background:new 0 0 76 76;" xml:space="preserve" @click=${() => {this._show_slider = !this._show_slider}}>
-                    <linearGradient id="SVGID_4_" gradientUnits="userSpaceOnUse" x1="-0.73" y1="-13.3767" x2="75.31" y2="-13.3767" gradientTransform="matrix(6.123234e-17 -1 -1 -6.123234e-17 24.6433 75.31)">
-                      <stop  offset="0" style="stop-color:#A41916"/>
-                      <stop  offset="1" style="stop-color:#D5D900"/>
-                    </linearGradient>
-                    <circle class="st0_icon4" cx="38" cy="38" r="38"/>
-                    <text transform="matrix(1 0 0 1 16.0434 48.5881)" class="st1_icon st2_icon st3_icon">pH</text>
-                    </svg>
-                    </div>  
-                    <div class="side_button_area_slider">
-                      <form class="slider_box" oninput="result.value=(v.value)">
-                        <output class="slider_value" name="result" for="v" @click=${() => {this._show_slider = !this._show_slider}}>${this.hass.states[this.config.ph_low].state}</output>
-                        <input class="slider" style="display:${this._show_slider ? 'none' : ' '};" type="range" id="v" name="v" value=${this.hass.states[this.config.ph_low].state} min=${this.hass.states[this.config.ph_low].attributes.min} max=${this.hass.states[this.config.ph_low].attributes.max} step="0.01" @change=${e => this._setInputNumber(this.config.ph_low, e.target.value)}/>
                       </form>
-                    </div>
-                  </div>
-              </div>
-            ` : html``}
+                      </foreignobject>
+                      <path @click=${() => {this._show_slider = !this._show_slider}} class="st6_icon" d="M97.7,64.3H12c-6.6,0-12-5.4-12-12V12C0,5.4,5.4,0,12,0h85.7c6.6,0,12,5.4,12,12v40.3C109.7,58.9,104.3,64.3,97.7,64.3z"/>
+                      </svg>
+                    ` : html``}
+                ${this.config.ph_low ? html`
+                  <svg version="1.1" id="Livello_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                    viewBox="0 0 ${this._show_slider ? '109.7' : '532'} 75" style="enable-background:new 0 0 ${this._show_slider ? '109.7' : '532'} 75;" xml:space="preserve">
+                  <path class="st_leftbadge_background ${stateObj_state < this.hass.states[this.config.ph_low].state ? 'blink-bg' : ' ' }" d="${this._show_slider ? 'M97.7,64.3H12c-6.6,0-12-5.4-12-12V12C0,5.4,5.4,0,12,0h85.7c6.6,0,12,5.4,12,12v40.3C109.7,58.9,104.3,64.3,97.7,64.3z' : 'M520,64.3H12c-6.6,0-12-5.4-12-12V12C0,5.4,5.4,0,12,0h508c6.6,0,12,5.4,12,12v40.3C532,58.9,526.6,64.3,520,64.3z'}"/>
+                  <text transform="matrix(1.0139 0 0 1 7.8831 13.6756)" class="st_primary_text_color st2_icon st3_icon">low pH</text>
+                  <linearGradient id="SVGID_4_icon" gradientUnits="userSpaceOnUse" x1="90.2718" y1="71.4865" x2="132.8441" y2="71.4865" gradientTransform="matrix(6.123234e-17 -1 -1 -6.123234e-17 100.6557 151.3224)">
+                    <stop  offset="0" style="stop-color:#A41916"/>
+                    <stop  offset="1" style="stop-color:#D5D900"/>
+                  </linearGradient>
+                  <circle class="st4_4_icon" cx="27.5" cy="38.1" r="19.6" />
+                  <text transform="matrix(0.9253 0 0 1 15.6927 43.3791)" class="st1_icon st2_icon st5_icon">pH</text>
+                  <foreignobject transform="matrix(0.84 0 0 0.9 55 24)"  width="100%" height="100%">
+                  <form class="slider_box" oninput="result.value=(v.value)">
+                    <output class="slider_value" name="result" for="v" >${this.hass.states[this.config.ph_low].state}</output>
+                    <input class="slider" style="display:${this._show_slider ? 'none' : ' '};" type="range" id="v" name="v" value=${this.hass.states[this.config.ph_low].state} min=${this.hass.states[this.config.ph_low].attributes.min} max=${this.hass.states[this.config.ph_low].attributes.max} step="0.01" @change=${e => this._setInputNumber(this.config.ph_low, e.target.value)}/>
+                  </form>
+                  </foreignobject>
+                  <path @click=${() => {this._show_slider = !this._show_slider}} class="st6_icon" d="M97.7,64.3H12c-6.6,0-12-5.4-12-12V12C0,5.4,5.4,0,12,0h85.7c6.6,0,12,5.4,12,12v40.3C109.7,58.9,104.3,64.3,97.7,64.3z"/>
+                  </svg>
+                ` : html``}
+
+
 
         ` : html``}
         ${this._show_slider ? html`
@@ -318,6 +316,7 @@ class PhMeterCard extends LitElement {
           </style>
         
       ${this.config.ec ? html`   
+      
         <svg CLASS="svg-badge" version="1.1" id="Livello_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
           viewBox="0 0 200 202" style="enable-background:new 0 0 200 202;" xml:space="preserve" @click=${() => this._moreinfo(this.config.ec)}>
         
@@ -443,6 +442,22 @@ class PhMeterCard extends LitElement {
       ` : html``}
       </div> 
     ` : html``}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <!-- ################################################################ pH meter section ############################################################ -->
     </div> 
       <div  class="phmeter-container" @click=${() => this._moreinfo(this.config.entity)}>
@@ -518,327 +533,7 @@ class PhMeterCard extends LitElement {
   static get styles() {
     return css`
 
-    :host {
-      background: var(--ha-card-background, var(--card-background-color, white) );
-      border-radius: var(--ha-card-border-radius, 4px);
-      box-shadow: var(--ha-card-box-shadow, 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12) );
-      color: var(--primary-text-color);
-      display: block;
-      transition: all .3s ease-out 0s;
-      position: relative;
-      padding-top: 10px;
-      filter: saturate(var(--color_saturation));
-  }
-  
-    .flex-container-badge {
-      display: flex;
-      margin: 10px;
-  
-    }
-  
-    .svg-badge {
-      max-width: 33%;
-      max-height: 33%;
-           // or any other units or measurements you want
-       }
-  
-  .phmeter-container {
-      display: grid;
-      grid-template-columns: repeat(14,1fr);
-      // grid-template-rows: auto auto;
-      padding: 10px;
-      
-  }
-  
-  
-  .temperature-container {
-      display: grid;
-      grid-template-columns: 50px auto 100px auto 50px;
-      grid-template-rows: 30px auto
-  }
-  
-  .ph-state-text {
-      display: grid;
-      grid-template-columns: 70px auto 80px auto 70px;
-      grid-template-rows: 30px;
-      padding: 0 10px
-  }
-  
-  .grid-max-temp,.grid-min-temp {
-      //background-color: rgba(255,255,255,.8);
-      //border: 1px solid rgba(255,255,255,.8);
-      grid-row: 2/3;
-      font-size: .9em;
-      text-align: center;
-      align-self: center;
-      color: rgba(255,255,255,.7);
-      font-weight: 700
-  }
-  
-  .grid-min-temp {
-      grid-column: 1/2
-  }
-  
-  .grid-max-temp {
-      grid-column: 5/6
-  }
-  
-  .grid-item,.grid-item-temp {
-      background-color: rgba(255,255,255,.8);
-      border: 1px solid rgba(255,255,255,.8);
-      font-size: 1.2em;
-      text-align: center;
-      color: #fff;
-      font-weight: 700
-  }
-  
-  .grid-item-temp {
-      grid-column: 1/15;
-      grid-row: 1/2;
-      padding: 20px 0
-  }
-  
-  .grid-item {
-      padding-top: 150%;
-      padding-bottom: 20%
-  }
-  
-  .grid-item-text-box,.ph_compact {
-      color: var(--primary-text-color)
-  }
-  
-  .grid-item-text-box {
-      //background-color: rgba(255,255,255,.8);
-      //border: 1px solid rgba(255,255,255,.8);
-      font-size: .8em;
-      text-align: center;
-      font-weight: 700
-  }
-  
-  .ph-logo-container {
-    border-left: 1px solid #15a8e0;
-    border-bottom: 1px solid #15a8e0;
-    border-radius: 30px;
-    margin: 20px 10px 5px
-  }
-  
-  .ph-logo-container-logo {
-    display: flex;
-    margin-bottom: 10px;
-  
-  }
-  
-  .ph-logo-alert {
-    display: flex;
-    flex-direction: column;
-    // width:20%; 
-    margin: 20px 20px 0px 12px ;
-    text-align: center;
-    border-top: 1px solid #15a8e0;
-    border-radius: 10px
-  }
-  .ph-logo-alert > svg {
-    margin-bottom: 4px ;
-  }
-  
-  .slider-alert {
-    display: grid;
-    grid-template-columns: 10% 90% ;
-    padding: 40px 20px 0px 12px ;
-  }
-  
-  .slider-alert > div {
-    align-self: center;
-    margin-left: 5px;
-  }
-  .slider-alert > div > input {
-    width: 85%;
-  }
-  
-  
-  .ph_compact {
-      margin: 20px 10px 0;
-      padding: 10px 0 5px;
-      font-size: 1.2em;
-      text-align: left
-  }
-  
-  .item-temp,.ph-cursor {
-      grid-row: 1/2;
-      text-align: right;
-      padding-top: 8px;
-      color: #fff;
-      text-shadow: -1px 2px 4px rgba(0,0,0,.5),1px 1px 3px rgba(0,0,0,.5)
-  }
-  
-  .ph-cursor {
-      grid-column: 1/15;
-      background-color: transparent;
-      font-size: 2.9em
-  }
-  
-  .item-temp {
-      font-size: 2.5em
-  }
-  
-  .item-c-1,.item-temp,.ph-cursor-space {
-      grid-column: 1/15;
-      background-color: transparent
-  }
-  
-  .ph-cursor-space {
-      grid-row: 1/2;
-      border-radius: 5px;
-      box-shadow: 5px 5px 7px inset rgba(0,0,0,.5),-5px -5px 7px inset rgba(0,0,0,.5)
-  }
-  
-  .item-row {
-      grid-row: 1/2
-  }
-  
-  .temp-box-gradient {
-      grid-column: 1/6;
-      grid-row: 2/3;
-      display: flex;
-      flex-flow: row wrap;
-      border-radius: 5px;
-      padding: 0;
-      margin: 0 10px;
-      list-style: none;
-      box-shadow: 5px 5px 7px inset rgba(0,0,0,.5),-5px -5px 7px inset rgba(0,0,0,.5)
-  }
-  
-  .temp-vale-box {
-      background: 0 0;
-      border: solid 3px #fff;
-      border-radius: 10px;
-      padding: 3px;
-      width: 30px;
-      height: 20px;
-      line-height: 20px;
-      color: #fff;
-      font-weight: 700;
-      font-size: .9em;
-      text-align: center;
-      margin: 7px 0;
-      box-shadow: -1px 2px 4px rgba(0,0,0,.5),1px 1px 3px rgba(0,0,0,.5),-1px 2px 4px inset rgba(0,0,0,.5),1px 1px 3px inset rgba(0,0,0,.5);
-      text-shadow: -1px 2px 4px rgba(0,0,0,.5),1px 1px 3px rgba(0,0,0,.5)
-  }
-  
-  
-  .svg {
-      grid-column: 1/5;
-      grid-row: 1/5;
-      padding: 10% 40% 10% 10%
-  }
-  
-  .ph_state {
-      grid-column: 3/4;
-      grid-row: 3/4;
-      font-size: 150%;
-      color: #15a8e0;
-      text-align: left
-  }
-  
-  .svg-ph-state {
-      grid-column: 2/4;
-      grid-row: 2/3;
-      width: 100%;
-      height: auto
-  }
-  
-  .ph-value-text {
-      transform: translate(8px,123px);
-      font-size: 162px;
-      fill: #15a8e0
-  }
-  
-  .name {
-      grid-column: 1/5;
-      grid-row: 4/5;
-      color: #15a8e0;
-      font-size: 1.5em;
-      align-self: flex-end;
-      text-align: right;
-      margin-right: 7%
-  }
-  
-  .side_badge_icon {
-    grid-column: 1 / 2;
-    grid-row: 2 / 3;
-    // grid-area: icon;
-  
-  }
-  
-  .alert_back {
-    display: flex;
-    padding: 3px;
-    width: 100%;
-  }
-  
-  
-  .side_button {
-    display: grid;
-    grid-template-rows: 1vw 2vw;
-    border-radius: 10px;
-    margin: 3px 0px 3px 0px;
-    grid-template-areas: 
-      "name name"
-      "icon slider";
-  }
-  
-  .text {
-    grid-area: name;
-    // margin: 4px 0px 2px 0px;
-    padding-top: 0.2vw;
-    text-align: left;
-    align-self: center;
-    padding-left: 10px;
-    font-size: 0.6vw;
-  }
-  .side_button_area_icon {
-    grid-area: icon;
-    align-self: center;
-    padding-left: 10px;
-  }
-  .side_button_area_slider {
-    grid-area: slider;
-    align-self: center;
-  }
-  
-  .slider_value {
-    font-size: 0.8vw;
-    padding: 8px;
-    width: 10%;
-   
-  }
-  .slider {
-    align-self: center;
-    width: 90%;
-   // display: none;
-  }
-  
-  
-  .slider_box {
-    display: flex;
-    padding-right: 13px;
-   
-  }
-  
-  .ph_name_full {
-    display: flex;
-    flex-flow: column; 
-    justify-content: space-between;
-    color: #15a8e0;
-  }
-  .blink-bg{
-		animation: blinkingBackground 2s infinite;
-	}
-	@keyframes blinkingBackground{
-		0%		{ background-color: transparent;}
-		50%		{ background-color: red; color: white;}
-		100%	{ background-color: transparent;}
-	}
+:host{background:var(--ha-card-background, var(--card-background-color, white) );border-radius:var(--ha-card-border-radius, 4px);box-shadow:var(--ha-card-box-shadow, 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12) );color:var(--primary-text-color);display:block;transition:all .3s ease-out 0s;position:relative;padding-top:10px;filter:saturate(var(--color_saturation))}.flex-container-badge{display:flex;margin:10px}.svg-badge{max-width:33%;max-height:33%}.phmeter-container{display:grid;grid-template-columns:repeat(14,1fr);padding:10px}.temperature-container{display:grid;grid-template-columns:50px auto 100px auto 50px;grid-template-rows:30px auto}.ph-state-text{display:grid;grid-template-columns:70px auto 80px auto 70px;grid-template-rows:30px;padding:0 10px}.grid-max-temp,.grid-min-temp{//background-color:rgba(255,255,255,.8);//border:1px solid rgba(255,255,255,.8);grid-row:2/3;font-size:.9em;text-align:center;align-self:center;color:rgba(255,255,255,.7);font-weight:700}.grid-min-temp{grid-column:1/2}.grid-max-temp{grid-column:5/6}.grid-item,.grid-item-temp{background-color:rgba(255,255,255,.8);border:1px solid rgba(255,255,255,.8);font-size:1.2em;text-align:center;color:#fff;font-weight:700}.grid-item-temp{grid-column:1/15;grid-row:1/2;padding:20px 0}.grid-item{padding-top:150%;padding-bottom:20%}.grid-item-text-box,.ph_compact{color:var(--primary-text-color)}.grid-item-text-box{//background-color:rgba(255,255,255,.8);//border:1px solid rgba(255,255,255,.8);font-size:.8em;text-align:center;font-weight:700}.ph-logo-container{border-left:1px solid #15a8e0;border-bottom:1px solid #15a8e0;border-radius:30px;margin:20px 10px 5px}.ph-logo-container-logo{display:flex;margin-bottom:10px}.ph-logo-alert{display:flex;flex-direction:column;margin:20px 20px 0 12px;text-align:center;border-top:1px solid #15a8e0;border-radius:10px}.slider-alert{display:grid;grid-template-columns:10% 90%;padding:40px 20px 0 12px}.slider-alert>div{align-self:center;margin-left:5px}.slider-alert>div>input{width:85%}.ph_compact{margin:20px 10px 0;padding:10px 0 5px;font-size:1.2em;text-align:left}.item-temp,.ph-cursor{grid-row:1/2;text-align:right;padding-top:8px;color:#fff;text-shadow:-1px 2px 4px rgba(0,0,0,.5),1px 1px 3px rgba(0,0,0,.5)}.ph-cursor{grid-column:1/15;background-color:transparent;font-size:2.9em}.item-temp{font-size:2.5em}.item-c-1,.item-temp,.ph-cursor-space{grid-column:1/15;background-color:transparent}.ph-cursor-space{grid-row:1/2;border-radius:5px;box-shadow:5px 5px 7px inset rgba(0,0,0,.5),-5px -5px 7px inset rgba(0,0,0,.5)}.item-row{grid-row:1/2}.temp-box-gradient{grid-column:1/6;grid-row:2/3;display:flex;flex-flow:row wrap;border-radius:5px;padding:0;margin:0 10px;list-style:none;box-shadow:5px 5px 7px inset rgba(0,0,0,.5),-5px -5px 7px inset rgba(0,0,0,.5)}.temp-vale-box{background:0 0;border:solid 3px #fff;border-radius:10px;padding:3px;width:30px;height:20px;line-height:20px;color:#fff;font-weight:700;font-size:.9em;text-align:center;margin:7px 0;box-shadow:-1px 2px 4px rgba(0,0,0,.5),1px 1px 3px rgba(0,0,0,.5),-1px 2px 4px inset rgba(0,0,0,.5),1px 1px 3px inset rgba(0,0,0,.5);text-shadow:-1px 2px 4px rgba(0,0,0,.5),1px 1px 3px rgba(0,0,0,.5)}.svg{grid-column:1/5;grid-row:1/5;padding:10% 40% 10% 10%}.ph_state{grid-column:3/4;grid-row:3/4;font-size:150%;color:#15a8e0;text-align:left}.svg-ph-state{grid-column:2/4;grid-row:2/3;width:100%;height:auto}.ph-value-text{transform:translate(8px,123px);font-size:162px;fill:#15a8e0}.name{grid-column:1/5;grid-row:4/5;color:#15a8e0;font-size:1.5em;align-self:flex-end;text-align:right;margin-right:7%}.alert_back{display:flex;padding:3px;width:100%}.slider_value{font-size:25px;padding:8px;width:10%}.slider{align-self:center;width:90%}.slider_box{display:flex}.ph_name_full{display:flex;flex-flow:column;justify-content:space-between;color:#15a8e0}
     `;
   }
 }
