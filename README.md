@@ -146,6 +146,11 @@ color_saturation: "50%"
 
 ![all](example/popup.jpg)
 
+
+note: this popup stop the render of the page. it is designed to warn of critical conditions in the aquarium which threaten the life of the fish. it is meant to be invasive in order to be surely read by the user.
+
+useless to enable it to monitor the water of a swimming pool
+
 ```yaml
 type: 'custom:ph-meter'
 entity: sensor.ph_sensor
@@ -162,9 +167,6 @@ ph_low: input_number.acquario_ph_low
 show_alert: true
 ```
 
-note: this popup stop the render of the page. it is designed to warn of critical conditions in the aquarium which threaten the life of the fish. it is meant to be invasive in order to be surely read by the user.
-
-useless to enable it to monitor the water of a swimming pool
 
 ## to use badges for alerts you need to configure input numbers in home assistant
 ```yaml
