@@ -54,10 +54,10 @@ class PhMeterCard extends LitElement {
     const temp_max_range_percent_max = temp_max_range_percent + 10;
     const show_alert = this.config.show_alert ? this.config.show_alert : false
 
-    if (this.config.temp_high && show_alert)   {
+    if (this.config.temp_high && show_alert && stateObj_2 != "unavailable" )   {
       const temp_high_alert = this.hass.states[this.config.temp_high].state
-      if ( stateObj_2 > temp_high_alert && this._show_alert_temp_high == true) {
-            alert("la temperatura dell'acquario è troppo alta: " + stateObj_2) + "°" ;
+      if ( stateObj_2 > temp_high_alert && this._show_alert_temp_high == true  && stateObj_2 != "unavailable" ) {
+            alert("water temperature is too high: " + stateObj_2 + "°") ;
             this._show_alert_temp_high = false;
           };
       if ( stateObj_2 < temp_high_alert) {
@@ -67,8 +67,8 @@ class PhMeterCard extends LitElement {
 
     if (this.config.temp_low && show_alert)   {
       const temp_low_alert = this.hass.states[this.config.temp_low].state
-      if ( stateObj_2 < temp_low_alert && this._show_alert_temp_low == true) {
-            alert("la temperatura dell'acquario è troppo bassa: " + stateObj_2 + "°" );
+      if ( stateObj_2 < temp_low_alert && this._show_alert_temp_low == true && stateObj_2 != "unavailable" ) {
+            alert("water temperature is too low: " + stateObj_2 + "°" );
             this._show_alert_temp_low = false;
           };
       if ( stateObj_2 > temp_low_alert) {
@@ -80,8 +80,8 @@ class PhMeterCard extends LitElement {
 
     if (this.config.ph_high && show_alert)   {
       const ph_high_alert = this.hass.states[this.config.ph_high].state
-      if ( stateObj_state > ph_high_alert && this._show_alert_ph_high == true) {
-            alert("il ph dell'acquario è troppo alto. Ph: " + stateObj_state) ;
+      if ( stateObj_state > ph_high_alert && this._show_alert_ph_high == true  && stateObj_state != "unavailable" ) {
+            alert("pH of the water is too high. Ph: " + stateObj_state) ;
             this._show_alert_ph_high = false;
     
           };
@@ -92,8 +92,8 @@ class PhMeterCard extends LitElement {
 
     if (this.config.ph_low && show_alert)   {
       const ph_low_alert = this.hass.states[this.config.ph_high].state
-      if ( stateObj_state > ph_low_alert && this._show_alert_ph_low == true) {
-            alert("il ph dell'acquario è troppo basso. Ph: " + stateObj_state) ;
+      if ( stateObj_state > ph_low_alert && this._show_alert_ph_low == true  && stateObj_state != "unavailable" ) {
+            alert("pH of the water is too low. Ph: " + stateObj_state) ;
             this._show_alert_ph_low = false;
     
           };
@@ -219,7 +219,7 @@ class PhMeterCard extends LitElement {
                     ${this.config.ph_high ? html`
                       <svg version="1.1" id="Livello_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                         viewBox="0 0 ${this._show_slider ? '109.7' : '532'} 75" style="enable-background:new 0 0 ${this._show_slider ? '109.7' : '532'} 75;" xml:space="preserve">
-                      <path class="st_leftbadge_background ${stateObj_state > this.hass.states[this.config.ph_high].state ? 'blink-bg' : ' ' }" d="${this._show_slider ? 'M97.7,64.3H12c-6.6,0-12-5.4-12-12V12C0,5.4,5.4,0,12,0h85.7c6.6,0,12,5.4,12,12v40.3C109.7,58.9,104.3,64.3,97.7,64.3z' : 'M520,64.3H12c-6.6,0-12-5.4-12-12V12C0,5.4,5.4,0,12,0h508c6.6,0,12,5.4,12,12v40.3C532,58.9,526.6,64.3,520,64.3z'}"/>
+                      <path class="st_leftbadge_background ${stateObj_state > this.hass.states[this.config.ph_high].state   ? 'blink-bg' : ' ' }" d="${this._show_slider ? 'M97.7,64.3H12c-6.6,0-12-5.4-12-12V12C0,5.4,5.4,0,12,0h85.7c6.6,0,12,5.4,12,12v40.3C109.7,58.9,104.3,64.3,97.7,64.3z' : 'M520,64.3H12c-6.6,0-12-5.4-12-12V12C0,5.4,5.4,0,12,0h508c6.6,0,12,5.4,12,12v40.3C532,58.9,526.6,64.3,520,64.3z'}"/>
                       <text transform="matrix(1.0139 0 0 1 7.8831 13.6756)" class="st_primary_text_color st2_icon st3_icon">high pH</text>
                       <linearGradient id="SVGID_3_icon" gradientUnits="userSpaceOnUse" x1="90.2718" y1="71.4865" x2="132.8441" y2="71.4865" gradientTransform="matrix(6.123234e-17 -1 -1 -6.123234e-17 100.6557 151.3224)">
                         <stop  offset="0" style="stop-color:#01ced1"/>
