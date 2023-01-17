@@ -38,21 +38,18 @@ type: module
 type: 'custom:ph-meter'
 entity: sensor.ph_sensor
 temperature: sensor.temperatura_acquario
-ph_state: sensor.ph_state
 ```
 
 ### lovelace no temperature config (ph meter):
 ```yaml
 type: 'custom:ph-meter'
 entity: sensor.ph_sensor
-ph_state: sensor.ph_state
 ```
 
 ### lovelace compact config ph meter compact):
 ```yaml
 type: 'custom:ph-meter'
 entity: sensor.ph_sensor
-ph_state: sensor.ph_state
 compact: true
 ```
 ### lovelace compact config ph meter compact & temperature):
@@ -60,7 +57,6 @@ compact: true
 type: 'custom:ph-meter'
 entity: sensor.ph_sensor
 temperature: sensor.temperatura_acquario
-ph_state: sensor.ph_state
 compact: true
 ```
 
@@ -71,7 +67,6 @@ compact: true
 | `entity` | string | **Required** |  | ph sensor entity |
 | `name` | string | **Option** |  | aquarium name |
 | `temperature` | string | **Option** |  | temperature sensor entity |
-| `ph_state` | string | **Option** |  | ph state sensor entity |
 | `tds` | string |  | sensor.yourtdssensor | tds sensor |
 | `ec` | string |  | sensor.yourecsensor | ec sensor |
 | `salinity` | string | **Option** | sensor.yoursolinitysensor | salinity sensor |
@@ -112,7 +107,6 @@ type: 'custom:ph-meter'
 entity: sensor.ph_sensor
 temperature: sensor.temperatura_acquario
 name: acquarium n°1
-ph_state: sensor.ph
 tds: sensor.tds
 salinity: sensor.salinity
 ec: sensor.ec
@@ -131,7 +125,6 @@ type: 'custom:ph-meter'
 entity: sensor.ph_sensor
 temperature: sensor.temperatura_acquario
 name: acquarium n°1
-ph_state: sensor.ph
 tds: sensor.tds
 salinity: sensor.salinity
 ec: sensor.ec
@@ -156,7 +149,6 @@ type: 'custom:ph-meter'
 entity: sensor.ph_sensor
 temperature: sensor.temperatura_acquario
 name: acquarium n°1
-ph_state: sensor.ph
 tds: sensor.tds
 salinity: sensor.salinity
 ec: sensor.ec
