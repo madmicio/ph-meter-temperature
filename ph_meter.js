@@ -38,6 +38,7 @@ class PhMeterCard extends LitElement {
     const temp_split_int = temp_array[0];
     const temp_split_dec = temp_array[1];
     const stateObj_2 = this.config.temperature ? this.hass.states[this.config.temperature].state : "0";
+    const chlorine = this.config.chlorine ? this.hass.states[this.config.chlorine].state : "0";
     const compact = this.config.compact ? this.compact : false;
     const temp_min = this.config.temp_min ? this.config.temp_min : "18";
     const temp_max = this.config.temp_max ? this.config.temp_max : "30";
@@ -219,7 +220,7 @@ class PhMeterCard extends LitElement {
                     ${this.config.ph_high ? html`
                       <svg version="1.1" id="Livello_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                         viewBox="0 0 ${this._show_slider ? '109.7' : '532'} 75" style="enable-background:new 0 0 ${this._show_slider ? '109.7' : '532'} 75;" xml:space="preserve">
-                      <path class="st_leftbadge_background ${stateObj_state > this.hass.states[this.config.ph_high].state   ? 'blink-bg' : ' ' }" d="${this._show_slider ? 'M97.7,64.3H12c-6.6,0-12-5.4-12-12V12C0,5.4,5.4,0,12,0h85.7c6.6,0,12,5.4,12,12v40.3C109.7,58.9,104.3,64.3,97.7,64.3z' : 'M520,64.3H12c-6.6,0-12-5.4-12-12V12C0,5.4,5.4,0,12,0h508c6.6,0,12,5.4,12,12v40.3C532,58.9,526.6,64.3,520,64.3z'}"/>
+                      <path class="st_leftbadge_background ${stateObj_state > this.hass.states[this.config.ph_high].state ? 'blink-bg' : ' ' }" d="${this._show_slider ? 'M97.7,64.3H12c-6.6,0-12-5.4-12-12V12C0,5.4,5.4,0,12,0h85.7c6.6,0,12,5.4,12,12v40.3C109.7,58.9,104.3,64.3,97.7,64.3z' : 'M520,64.3H12c-6.6,0-12-5.4-12-12V12C0,5.4,5.4,0,12,0h508c6.6,0,12,5.4,12,12v40.3C532,58.9,526.6,64.3,520,64.3z'}"/>
                       <text transform="matrix(1.0139 0 0 1 7.8831 13.6756)" class="st_primary_text_color st2_icon st3_icon">high pH</text>
                       <linearGradient id="SVGID_3_icon" gradientUnits="userSpaceOnUse" x1="90.2718" y1="71.4865" x2="132.8441" y2="71.4865" gradientTransform="matrix(6.123234e-17 -1 -1 -6.123234e-17 100.6557 151.3224)">
                         <stop  offset="0" style="stop-color:#01ced1"/>
@@ -440,6 +441,44 @@ class PhMeterCard extends LitElement {
         <text transform="matrix(1 0 0 1 49.2139 174.4214)" class="st7 st8 st9">${this.hass.states[this.config.salinity].state} ppm</text>
       </svg>
       ` : html``}
+      ${this.config.chlorine ? html`
+      <svg CLASS="svg-badge" version="1.1" id="Livello_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+          viewBox="0 0 200 202" style="enable-background:new 0 0 200 202;" xml:space="preserve" @click=${() => this._moreinfo(this.config.chlorine)}>
+        
+        <path class="st0" d="M174,198H25c-11.05,0-20-8.95-20-20V54c0-11.05,8.95-20,20-20h149c11.05,0,20,8.95,20,20v124
+          C194,189.05,185.05,198,174,198z"/>
+        <g class="st1">
+          <defs>
+            <circle id="SVGID_1_" class="st1" cx="56.69" cy="42.26" r="57.75"/>
+          </defs>
+          <clipPath id="SVGID_00000117661550534029500300000000101764517104882819_">
+            <use xlink:href="#SVGID_1_"  style="overflow:visible;"/>
+          </clipPath>
+          <path style="opacity:0.82;clip-path:url(#SVGID_00000117661550534029500300000000101764517104882819_);fill:${badge_color};" d="M174,198
+            H25c-11.05,0-20-8.95-20-20V54c0-11.05,8.95-20,20-20h149c11.05,0,20,8.95,20,20v124C194,189.05,185.05,198,174,198z"/>
+        </g>
+        <g class="st1">
+          <defs>
+            <circle id="SVGID_00000178889116323830339970000003713395884853770656_" class="st1" cx="56.69" cy="42.26" r="48.51"/>
+          </defs>
+          <clipPath id="SVGID_00000106126236466186900480000017781585474458464438_">
+            <use xlink:href="#SVGID_00000178889116323830339970000003713395884853770656_"  style="overflow:visible;"/>
+          </clipPath>
+          <path style="opacity:0.82;clip-path:url(#SVGID_00000106126236466186900480000017781585474458464438_);fill:${badge_color};" d="M174,198
+            H25c-11.05,0-20-8.95-20-20V54c0-11.05,8.95-20,20-20h149c11.05,0,20,8.95,20,20v124C194,189.05,185.05,198,174,198z"/>
+        </g>
+        <linearGradient id="SVGID_00000145026068835452480210000014733037783391163786_" gradientUnits="userSpaceOnUse" x1="49.943" y1="30.9383" x2="120.783" y2="30.9383" gradientTransform="matrix(6.123234e-17 -1 1 6.123234e-17 25.75 127.625)">
+            <stop  offset="0" style="stop-color:#61EDDD"/>
+            <stop  offset="0.2205" style="stop-color:#58E4E0"/>
+            <stop  offset="0.5869" style="stop-color:#3FCAE8"/>
+            <stop  offset="1" style="stop-color:#1BA6F3"/>
+        </linearGradient>
+        <circle class="${chlorine < '550' || chlorine > '750'  ? 'blink-bg' : ' ' }"" style="fill:url(#SVGID_00000145026068835452480210000014733037783391163786_);" cx="56.69" cy="42.26" r="35.42"/>
+        <text transform="matrix(1 0 0 1 21.5351 137.1265)" class="st9 st7 st8">chlorine:</text>
+        <text transform="matrix(1 0 0 1 49.2139 174.4214)" class="st9 st7 st8">${this.hass.states[this.config.chlorine].state} us</text>
+        <text transform="matrix(1 0 0 1 40.3924 52.8279)" class="st6 st7 st10">CL</text>
+        </svg>
+        ` : html``}
       </div> 
     ` : html``}
 
@@ -533,7 +572,7 @@ class PhMeterCard extends LitElement {
   static get styles() {
     return css`
 
-:host{background:var(--ha-card-background, var(--card-background-color, white) );border-radius:var(--ha-card-border-radius, 4px);box-shadow:var(--ha-card-box-shadow, 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12) );color:var(--primary-text-color);display:block;transition:all .3s ease-out 0s;position:relative;padding-top:10px;filter:saturate(var(--color_saturation))}.flex-container-badge{display:flex;margin:10px}.svg-badge{max-width:33%;max-height:33%}.phmeter-container{display:grid;grid-template-columns:repeat(14,1fr);padding:10px}.temperature-container{display:grid;grid-template-columns:50px auto 100px auto 50px;grid-template-rows:30px auto}.ph-state-text{display:grid;grid-template-columns:70px auto 80px auto 70px;grid-template-rows:30px;padding:0 10px}.grid-max-temp,.grid-min-temp{//background-color:rgba(255,255,255,.8);//border:1px solid rgba(255,255,255,.8);grid-row:2/3;font-size:.9em;text-align:center;align-self:center;color:rgba(255,255,255,.7);font-weight:700}.grid-min-temp{grid-column:1/2}.grid-max-temp{grid-column:5/6}.grid-item,.grid-item-temp{background-color:rgba(255,255,255,.8);border:1px solid rgba(255,255,255,.8);font-size:1.2em;text-align:center;color:#fff;font-weight:700}.grid-item-temp{grid-column:1/15;grid-row:1/2;padding:20px 0}.grid-item{padding-top:150%;padding-bottom:20%}.grid-item-text-box,.ph_compact{color:var(--primary-text-color)}.grid-item-text-box{//background-color:rgba(255,255,255,.8);//border:1px solid rgba(255,255,255,.8);font-size:.8em;text-align:center;font-weight:700}.ph-logo-container{border-left:1px solid #15a8e0;border-bottom:1px solid #15a8e0;border-radius:30px;margin:20px 10px 5px}.ph-logo-container-logo{display:flex;margin-bottom:10px}.ph-logo-alert{display:flex;flex-direction:column;margin:20px 20px 0 12px;text-align:center;border-top:1px solid #15a8e0;border-radius:10px}.slider-alert{display:grid;grid-template-columns:10% 90%;padding:40px 20px 0 12px}.slider-alert>div{align-self:center;margin-left:5px}.slider-alert>div>input{width:85%}.ph_compact{margin:20px 10px 0;padding:10px 0 5px;font-size:1.2em;text-align:left}.item-temp,.ph-cursor{grid-row:1/2;text-align:right;padding-top:8px;color:#fff;text-shadow:-1px 2px 4px rgba(0,0,0,.5),1px 1px 3px rgba(0,0,0,.5)}.ph-cursor{grid-column:1/15;background-color:transparent;font-size:2.9em}.item-temp{font-size:2.5em}.item-c-1,.item-temp,.ph-cursor-space{grid-column:1/15;background-color:transparent}.ph-cursor-space{grid-row:1/2;border-radius:5px;box-shadow:5px 5px 7px inset rgba(0,0,0,.5),-5px -5px 7px inset rgba(0,0,0,.5)}.item-row{grid-row:1/2}.temp-box-gradient{grid-column:1/6;grid-row:2/3;display:flex;flex-flow:row wrap;border-radius:5px;padding:0;margin:0 10px;list-style:none;box-shadow:5px 5px 7px inset rgba(0,0,0,.5),-5px -5px 7px inset rgba(0,0,0,.5)}.temp-vale-box{background:0 0;border:solid 3px #fff;border-radius:10px;padding:3px;width:30px;height:20px;line-height:20px;color:#fff;font-weight:700;font-size:.9em;text-align:center;margin:7px 0;box-shadow:-1px 2px 4px rgba(0,0,0,.5),1px 1px 3px rgba(0,0,0,.5),-1px 2px 4px inset rgba(0,0,0,.5),1px 1px 3px inset rgba(0,0,0,.5);text-shadow:-1px 2px 4px rgba(0,0,0,.5),1px 1px 3px rgba(0,0,0,.5)}.svg{grid-column:1/5;grid-row:1/5;padding:10% 40% 10% 10%}.ph_state{grid-column:3/4;grid-row:3/4;font-size:150%;color:#15a8e0;text-align:left}.svg-ph-state{grid-column:2/4;grid-row:2/3;width:100%;height:auto}.ph-value-text{transform:translate(8px,123px);font-size:162px;fill:#15a8e0}.name{grid-column:1/5;grid-row:4/5;color:#15a8e0;font-size:1.5em;align-self:flex-end;text-align:right;margin-right:7%}.alert_back{display:flex;padding:3px;width:100%}.slider_value{font-size:25px;padding:8px;width:10%}.slider{align-self:center;width:90%}.slider_box{display:flex}.ph_name_full{display:flex;flex-flow:column;justify-content:space-between;color:#15a8e0}
+    :host{background:var(--ha-card-background, var(--card-background-color, white) );border-radius:var(--ha-card-border-radius, 4px);box-shadow:var(--ha-card-box-shadow, 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12) );color:var(--primary-text-color);display:block;transition:all .3s ease-out 0s;position:relative;padding-top:10px;filter:saturate(var(--color_saturation))}.flex-container-badge{display:flex;margin:10px}.svg-badge{max-width:33%;max-height:33%}.phmeter-container{display:grid;grid-template-columns:repeat(14,1fr);padding:10px}.temperature-container{display:grid;grid-template-columns:50px auto 100px auto 50px;grid-template-rows:30px auto}.ph-state-text{display:grid;grid-template-columns:70px auto 80px auto 70px;grid-template-rows:30px;padding:0 10px}.grid-max-temp,.grid-min-temp{//background-color:rgba(255,255,255,.8);//border:1px solid rgba(255,255,255,.8);grid-row:2/3;font-size:.9em;text-align:center;align-self:center;color:rgba(255,255,255,.7);font-weight:700}.grid-min-temp{grid-column:1/2}.grid-max-temp{grid-column:5/6}.grid-item,.grid-item-temp{background-color:rgba(255,255,255,.8);border:1px solid rgba(255,255,255,.8);font-size:1.2em;text-align:center;color:#fff;font-weight:700}.grid-item-temp{grid-column:1/15;grid-row:1/2;padding:20px 0}.grid-item{padding-top:150%;padding-bottom:20%}.grid-item-text-box,.ph_compact{color:var(--primary-text-color)}.grid-item-text-box{//background-color:rgba(255,255,255,.8);//border:1px solid rgba(255,255,255,.8);font-size:.8em;text-align:center;font-weight:700}.ph-logo-container{border-left:1px solid #15a8e0;border-bottom:1px solid #15a8e0;border-radius:30px;margin:20px 10px 5px}.ph-logo-container-logo{display:flex;margin-bottom:10px}.ph-logo-alert{display:flex;flex-direction:column;margin:20px 20px 0 12px;text-align:center;border-top:1px solid #15a8e0;border-radius:10px}.slider-alert{display:grid;grid-template-columns:10% 90%;padding:40px 20px 0 12px}.slider-alert>div{align-self:center;margin-left:5px}.slider-alert>div>input{width:85%}.ph_compact{margin:20px 10px 0;padding:10px 0 5px;font-size:1.2em;text-align:left}.item-temp,.ph-cursor{grid-row:1/2;text-align:right;padding-top:8px;color:#fff;text-shadow:-1px 2px 4px rgba(0,0,0,.5),1px 1px 3px rgba(0,0,0,.5)}.ph-cursor{grid-column:1/15;background-color:transparent;font-size:2.9em}.item-temp{font-size:2.5em}.item-c-1,.item-temp,.ph-cursor-space{grid-column:1/15;background-color:transparent}.ph-cursor-space{grid-row:1/2;border-radius:5px;box-shadow:5px 5px 7px inset rgba(0,0,0,.5),-5px -5px 7px inset rgba(0,0,0,.5)}.item-row{grid-row:1/2}.temp-box-gradient{grid-column:1/6;grid-row:2/3;display:flex;flex-flow:row wrap;border-radius:5px;padding:0;margin:0 10px;list-style:none;box-shadow:5px 5px 7px inset rgba(0,0,0,.5),-5px -5px 7px inset rgba(0,0,0,.5)}.temp-vale-box{background:0 0;border:solid 3px #fff;border-radius:10px;padding:3px;width:30px;height:20px;line-height:20px;color:#fff;font-weight:700;font-size:.9em;text-align:center;margin:7px 0;box-shadow:-1px 2px 4px rgba(0,0,0,.5),1px 1px 3px rgba(0,0,0,.5),-1px 2px 4px inset rgba(0,0,0,.5),1px 1px 3px inset rgba(0,0,0,.5);text-shadow:-1px 2px 4px rgba(0,0,0,.5),1px 1px 3px rgba(0,0,0,.5)}.svg{grid-column:1/5;grid-row:1/5;padding:10% 40% 10% 10%}.ph_state{grid-column:3/4;grid-row:3/4;font-size:150%;color:#15a8e0;text-align:left}.svg-ph-state{grid-column:2/4;grid-row:2/3;width:100%;height:auto}.ph-value-text{transform:translate(8px,123px);font-size:162px;fill:#15a8e0}.name{grid-column:1/5;grid-row:4/5;color:#15a8e0;font-size:1.5em;align-self:flex-end;text-align:right;margin-right:7%}.alert_back{display:flex;padding:3px;width:100%}.slider_value{font-size:25px;padding:8px;width:10%}.slider{align-self:center;width:90%}.slider_box{display:flex}.ph_name_full{display:flex;flex-flow:column;justify-content:space-between;color:#15a8e0}
     `;
   }
 }
