@@ -69,7 +69,8 @@ compact: true
 | `temperature` | string | **Option** |  | temperature sensor entity |
 | `tds` | string |  | sensor.yourtdssensor | tds sensor |
 | `ec` | string |  | sensor.yourecsensor | ec sensor |
-| `salinity` | string | **Option** | sensor.yoursolinitysensor | salinity sensor |
+| `salinity` | string | **Option** | sensor.yoursalinitysensor | salinity sensor |
+| `chlorine` | string | **Option** | sensor.yourchlorinesensor | chlorine sensor |
 | `temp_high` | string | **Option** | input_number.yourinput_number_high_temp | to allow this option you need to define a input number for high value temperature alert |
 | `temp_low` | string | **Option** | input_number.yourinput_number_low_temp | to allow this option you need to define a input number for low value temperature alert |
 | `ph_high` | string | **Option** | input_number.yourinput_number_ph_temp | to allow this option you need to define a input number for high value pH alert |
