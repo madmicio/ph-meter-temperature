@@ -475,7 +475,7 @@ class PhMeterCard extends LitElement {
         </linearGradient>
         <circle class="${chlorine < '550' || chlorine > '750'  ? 'blink-bg' : ' ' }"" style="fill:url(#SVGID_00000145026068835452480210000014733037783391163786_);" cx="56.69" cy="42.26" r="35.42"/>
         <text transform="matrix(1 0 0 1 21.5351 137.1265)" class="st9 st7 st8">chlorine:</text>
-        <text transform="matrix(1 0 0 1 49.2139 174.4214)" class="st9 st7 st8">${this.hass.states[this.config.chlorine].state} us</text>
+        <text transform="matrix(1 0 0 1 49.2139 174.4214)" class="st9 st7 st8">${this.hass.states[this.config.chlorine].state} mV</text>
         <text transform="matrix(1 0 0 1 40.3924 52.8279)" class="st6 st7 st10">CL</text>
         </svg>
         ` : html``}
