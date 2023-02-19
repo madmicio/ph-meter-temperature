@@ -12,11 +12,9 @@ ph meter & temperature for aquarium & swimming pool
 
 
 ## hacs Card install
-1. add madmicio/pH-meter-Temperature as custom reposity
+click on:
 
-2. Find and install `pH-meter-Temperature` plugin
-
-3. Add a reference  inside your resources config:
+[![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=madmicio&repository=ph-meter-temperature&category=plugin)
 
   ```yaml
 resources:
