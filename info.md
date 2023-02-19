@@ -11,30 +11,6 @@ ph meter & temperature for aquarium & swimming pool
 ![all](example/card3.jpg)
 
 
-## hacs Card install
-1. add madmicio/pH-meter-Temperature as custom reposity
-
-2. Find and install `pH-meter-Temperature` plugin
-
-3. Add a reference  inside your resources config:
-
-  ```yaml
-resources:
-url: /hacsfiles/ph-meter-temperature/ph_meter.js
-type: module
-```
-
-
-### Manual install
-
-1. Download and copy `ph_meter.js` from (https://github.com/madmicio/pH-meter-Temperature) into your custom components  directory.
-
-2. Add a reference `ph_meter.js` inside your resources config:
-
-  ```yaml
-  resources:
-    - url: /local/"your_directory"/ph_meter.js
-      type: module
   ```
 ### lovelace full config (ph meter & temperature):
 ```yaml
